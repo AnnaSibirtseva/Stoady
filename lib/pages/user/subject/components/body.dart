@@ -29,7 +29,6 @@ class Body extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "Montserrat",
                         color: Colors.black45))),
             Expanded(
                 child: ListView.builder(

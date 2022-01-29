@@ -34,7 +34,6 @@ class ScoreCard extends StatelessWidget {
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                             fontSize: 20,
-                            fontFamily: "Montserrat",
                             color: Colors.black,
                             fontWeight: FontWeight.w700),
                       ))),
@@ -48,9 +47,8 @@ class ScoreCard extends StatelessWidget {
                         textAlign: TextAlign.right,
                         style: const TextStyle(
                             fontSize: 20,
-                            fontFamily: "Montserrat",
                             color: Colors.black,
-                            fontWeight: FontWeight.w700),
+                            fontWeight: FontWeight.w900),
                       )))
             ])));
   }

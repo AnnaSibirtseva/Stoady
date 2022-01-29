@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/log_in/log_in_page.dart';
+import 'package:stoady/pages/user/group/group_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 import 'package:stoady/pages/user/saved/saved_page.dart';
 import 'package:stoady/pages/user/statistics/statistics_page.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
-
-  // ListTile createMenuTool(String name, IconData icon, Function onTapFunc) {
-  //   return ListTile(
-  //     leading: Icon(icon),
-  //     title: Text(name,
-  //         style: const TextStyle(
-  //             fontSize: 20.0,
-  //             fontWeight: FontWeight.w700,
-  //             fontFamily: "Montserrat")),
-  //     onTap: () => onTapFunc,
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +16,15 @@ class SideMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text('Kermit',
-                style: TextStyle(
+            accountName: Text(Logic.currentUser.getName(),
+                style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w900,
-                    fontFamily: "Montserrat",
                     color: Colors.black)),
-            accountEmail: const Text('kermit_the_frog@mail.ru',
-                style: TextStyle(
+            accountEmail: Text(Logic.currentUser.getEmail(),
+                style: const TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat",
                     color: Colors.black38)),
             currentAccountPicture: CircleAvatar(
                 child: ClipOval(
@@ -54,8 +42,7 @@ class SideMenu extends StatelessWidget {
             title: const Text('Saved',
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat")),
+                    fontWeight: FontWeight.w700)),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const SavedQuestionsPage())),
           ),
@@ -65,21 +52,29 @@ class SideMenu extends StatelessWidget {
             title: const Text('Statistics',
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat")),
+                    fontWeight: FontWeight.w700)),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const StatisticsPage())),
           ),
           ListTile(
-            leading: const Icon(Icons.library_books_outlined,
+            leading: const Icon(Icons.groups_outlined,
                 size: 35, color: Colors.black),
-            title: const Text('Subjects',
+            title: const Text('Groups',
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat")),
+                    fontWeight: FontWeight.w700)),
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const UserHomePage())),
+                MaterialPageRoute(builder: (context) => const GroupPage())),
+          ),
+          // TODO: check that person is admin in this group.
+          ListTile(
+            leading: const Icon(Icons.admin_panel_settings_outlined,
+                size: 35, color: Colors.black),
+            title: const Text('Admin Mode',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w700)),
+            onTap: () => {},
           ),
           const Divider(),
           ListTile(
@@ -88,8 +83,7 @@ class SideMenu extends StatelessWidget {
             title: const Text('Log Out',
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat")),
+                    fontWeight: FontWeight.w700)),
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const LogInPage())),
           )

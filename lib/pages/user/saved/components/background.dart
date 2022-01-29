@@ -28,7 +28,6 @@ class Background extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 35.0,
                           fontWeight: FontWeight.w800,
-                          fontFamily: "Montserrat",
                           color: Colors.black)),
                 ),
                 SizedBox(height: size.height * 0.025),

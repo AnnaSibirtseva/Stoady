@@ -39,7 +39,6 @@ class SubjectCard extends StatelessWidget {
                       subject.getTitle(),
                       style: const TextStyle(
                           fontSize: 24,
-                          fontFamily: "Montserrat",
                           color: Colors.black,
                           fontWeight: FontWeight.w800
                       ),

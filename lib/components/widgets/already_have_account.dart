@@ -20,7 +20,6 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
           style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w600,
-              fontFamily: "Montserrat",
               color: Colors.black38),
         ),
         GestureDetector(

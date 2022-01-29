@@ -7,23 +7,21 @@ class RoundedButton extends StatelessWidget {
   final bool reverse, borders, isSmall;
 
   const RoundedButton({
+    Key? key,
     required this.text,
     required this.press,
     required this.reverse,
     required this.borders,
     required this.isSmall,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      // Indents top and bottom.
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child:
-            isSmall ? smallElevatedButton(context) : newElevatedButton(context),
-      ),
+      child: isSmall ? smallElevatedButton(context) : newElevatedButton(context)
     );
   }
 
@@ -35,16 +33,15 @@ class RoundedButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.w900,
-            fontFamily: "Montserrat",
-            color: textColor),
+            fontSize: 30.0, fontFamily: 'Nunito', fontWeight: FontWeight.w900, color: textColor),
       ),
       style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
           primary: color,
           side: borders
               ? const BorderSide(width: 1, color: Colors.black)
-              : const BorderSide(width: 0, color: Colors.black),
+              : const BorderSide(width: 0, color: Colors.black12,),
+          // Moves text in the button.
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           textStyle: TextStyle(
               color: textColor, fontSize: 15.0, fontWeight: FontWeight.w500)),
@@ -58,14 +55,15 @@ class RoundedButton extends StatelessWidget {
           text,
           style: TextStyle(
               fontSize: 20.0,
+              fontFamily: 'Nunito',
               fontWeight: FontWeight.w700,
-              fontFamily: "Montserrat",
               color: reverse ? color : textColor),
         ),
         style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
             primary: reverse ? textColor : color,
+            //todo change to screen size
             fixedSize: const Size(150, 40),
-            //padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             textStyle: TextStyle(
                 color: reverse ? color : textColor,
                 fontSize: 15.0,

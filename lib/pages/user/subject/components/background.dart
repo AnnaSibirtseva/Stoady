@@ -27,15 +27,14 @@ class Background extends StatelessWidget {
               Positioned(
                   child: Image.asset(
                 "assets/images/subject_lily.png",
-                width: size.width * 0.17,
+                width: size.width * 0.15,
               )),
               SizedBox(width: size.height * 0.025),
               Flexible(
                 child: Text(currentSubject.getTitle(),
                     style: const TextStyle(
-                        fontSize: 35.0,
+                        fontSize: 28.0,
                         fontWeight: FontWeight.w800,
-                        fontFamily: "Montserrat",
                         color: Colors.black)),
               )
             ]),

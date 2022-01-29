@@ -7,10 +7,11 @@ class RoundedInputField extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const RoundedInputField({
+    Key? key,
     required this.hintText,
     this.icon = Icons.email_outlined,
     required this.onChanged,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

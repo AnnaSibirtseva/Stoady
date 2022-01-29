@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/topic.dart';
+import 'package:stoady/models/group.dart';
+import 'package:stoady/models/subject.dart';
 
-class TopicCard extends StatelessWidget {
-  const TopicCard({
+class GroupCard extends StatelessWidget {
+  const GroupCard({
     Key? key,
-    required this.topic,
+    required this.group,
     required this.press,
   }) : super(key: key);
 
-  final Topic topic;
+  final Group group;
   final VoidCallback press;
 
   @override
@@ -17,15 +18,18 @@ class TopicCard extends StatelessWidget {
         onTap: press,
         child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 25, vertical: 10),
+                horizontal: 20, vertical: 30),
             child: Row(
                 children: [
                   Stack(
-                    children: const [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage("assets/images/topic_lily.png"),
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          group.getAvatar(),
+                          width: 95,
+                          height: 95,
+                          fit: BoxFit.cover,
+                        ),
                       )
                     ],
                   ),
@@ -35,14 +39,14 @@ class TopicCard extends StatelessWidget {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  topic.getTitle(),
+                                Text(group.getGroupName(),
                                   style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 24,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w800
                                   ),
                                 ),
+                                const SizedBox(height: 3),
                               ]
                           )
                       )

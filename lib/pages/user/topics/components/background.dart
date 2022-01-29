@@ -32,14 +32,6 @@ class Background extends StatelessWidget {
           //alignment: Alignment.center,
           children: <Widget>[
             Row(children: <Widget>[
-              SizedBox(height: size.height * 0.065, width: size.height * 0.017),
-              GestureDetector(
-                onTap: () => Navigator.pop(context), // Image tapped
-                child: Image.asset('assets/images/back_button.png',
-                    width: size.width * 0.2),
-              )
-            ]),
-            Row(children: <Widget>[
               SizedBox(height: size.height * 0.25, width: size.height * 0.04),
               Positioned(
                   child: Image.asset(
@@ -52,7 +44,6 @@ class Background extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.w800,
-                        fontFamily: "Montserrat",
                         color: Colors.black)),
               ),
             ]),
@@ -66,7 +57,6 @@ class Background extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.w500,
-                            fontFamily: "Montserrat",
                             color: Colors.black45)))),
             child,
           ]),

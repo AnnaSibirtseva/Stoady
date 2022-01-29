@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Nunito',
         primarySwatch: Colors.teal,
       ),
       home: const UserHomePage(),

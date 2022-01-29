@@ -23,6 +23,14 @@ class User {
     saved.remove(task);
   }
 
+  String getName() {
+    return _name;
+  }
+
+  String getEmail() {
+    return _email;
+  }
+
   bool isSaved(Task task) {
     if (saved.contains(task)) {
       return true;

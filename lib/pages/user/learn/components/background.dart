@@ -22,13 +22,7 @@ class Background extends StatelessWidget {
               //alignment: Alignment.center,
               children: <Widget>[
             Row(children: <Widget>[
-              SizedBox(height: size.height * 0.065, width: size.height * 0.017),
-              GestureDetector(
-                onTap: () => Navigator.pop(context), // Image tapped
-                child: Image.asset('assets/images/back_button.png',
-                    width: size.width * 0.2),
-              ),
-              SizedBox(height: size.height * 0.08, width: size.height * 0.32),
+              SizedBox(height: size.height * 0.08, width: size.height * 0.45),
               savedStar(size, context),
             ]),
             Column(children: <Widget>[
@@ -115,7 +109,6 @@ Widget testPath(Size size) {
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 26,
-          fontFamily: "Montserrat",
           color: Colors.black54,
           fontWeight: FontWeight.w900),
     ),
@@ -124,7 +117,6 @@ Widget testPath(Size size) {
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 22,
-          fontFamily: "Montserrat",
           color: Colors.black54,
           fontWeight: FontWeight.w700),
     ),
@@ -141,7 +133,6 @@ Widget questionsCounter(Size size) {
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 22,
-          fontFamily: "Montserrat",
           color: Colors.black45,
           fontWeight: FontWeight.w700),
     ),

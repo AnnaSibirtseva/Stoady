@@ -101,7 +101,6 @@ class _Card extends State<LearningCard> {
           textAlign: TextAlign.center,
           style: const TextStyle(
               fontSize: 22,
-              fontFamily: "Montserrat",
               color: Colors.black,
               fontWeight: FontWeight.w500),
         ),

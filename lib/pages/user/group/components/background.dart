@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/logic.dart';
+import 'dart:math' as math;
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -13,7 +13,7 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     // This size provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
         height: size.height,
         width: double.infinity,
         child: Stack(children: <Widget>[
@@ -23,19 +23,21 @@ class Background extends StatelessWidget {
               SizedBox(height: size.height * 0.2, width: size.height * 0.02),
               Positioned(
                   child: Image.asset(
-                "assets/images/first_frog.png",
-                width: size.width * 0.15,
-              )),
-               Text(Logic.currentGroup.getName(),
-                  style: const TextStyle(
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.teal)),
-              Positioned(
-                  child: Image.asset(
-                "assets/images/second_frog.png",
-                width: size.width * 0.15,
-              )),
+                    "assets/images/business_frog.png",
+                    width: size.width * 0.16,
+                  )),
+              const Text("Groups",
+                  style: TextStyle(
+                      fontSize: 35.0,
+                      fontWeight: FontWeight.w900)),
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(math.pi),
+                child: Image.asset(
+                  "assets/images/business_frog.png",
+                  width: size.width * 0.16,
+                ),
+              ),
               SizedBox(height: size.height * 0.2, width: size.height * 0.02)
             ],
           ),
