@@ -24,14 +24,15 @@ class Body extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: Logic.allGroups.length,
                     itemBuilder: (context, index) => GroupCard(
-                      group: Logic.allGroups[index],
-                      press: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const UserHomePage())
-                      ),
-                    )
-                )),
+                        group: Logic.allGroups[index],
+                        press: () => {
+                              Logic.currentGroup = Logic.allGroups[index],
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const UserHomePage())),
+                            }))),
           ]),
     );
   }

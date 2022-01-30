@@ -17,13 +17,13 @@ class SubjectCard extends StatelessWidget {
       onTap: press,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: 20, vertical: 30),
+            horizontal: 20, vertical: 20),
         child: Row(
           children: [
             Stack(
               children: const [
                 CircleAvatar(
-                  radius: 35,
+                  radius: 30,
                   backgroundColor: Colors.white,
                   backgroundImage: AssetImage("assets/images/subject_lily.png"),
                 )
@@ -38,7 +38,7 @@ class SubjectCard extends StatelessWidget {
                     Text(
                       subject.getTitle(),
                       style: const TextStyle(
-                          fontSize: 24,
+                          fontSize: 22,
                           color: Colors.black,
                           fontWeight: FontWeight.w800
                       ),

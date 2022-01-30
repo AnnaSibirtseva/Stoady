@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/components/widgets/menu_list_tile.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/log_in/log_in_page.dart';
 import 'package:stoady/pages/user/group/group_page.dart';
@@ -36,57 +37,44 @@ class SideMenu extends StatelessWidget {
               ),
             )),
           ),
-          ListTile(
-            leading: const Icon(Icons.star_outline_rounded,
-                size: 35, color: Colors.black),
-            title: const Text('Saved',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700)),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SavedQuestionsPage())),
-          ),
-          ListTile(
-            leading: const Icon(Icons.bar_chart_rounded,
-                size: 35, color: Colors.black),
-            title: const Text('Statistics',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700)),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const StatisticsPage())),
-          ),
-          ListTile(
-            leading: const Icon(Icons.groups_outlined,
-                size: 35, color: Colors.black),
-            title: const Text('Groups',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700)),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const GroupPage())),
-          ),
+          MenuListTile(
+              press: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SavedQuestionsPage())),
+              text: 'Saved',
+              icon: Icons.star_outline_rounded),
+          MenuListTile(
+              press: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const StatisticsPage())),
+              text: 'Statistics',
+              icon: Icons.bar_chart_rounded),
+          MenuListTile(
+              press: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const GroupPage())),
+              text: 'Groups',
+              icon: Icons.groups_outlined),
+          MenuListTile(
+              press: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UserHomePage())),
+              text: 'Subjects',
+              icon: Icons.library_books_outlined),
+
           // TODO: check that person is admin in this group.
-          ListTile(
-            leading: const Icon(Icons.admin_panel_settings_outlined,
-                size: 35, color: Colors.black),
-            title: const Text('Admin Mode',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700)),
-            onTap: () => {},
-          ),
+          MenuListTile(
+              press: () => {},
+              text: 'Admin Mode',
+              icon: Icons.admin_panel_settings_outlined),
           const Divider(),
-          ListTile(
-            leading:
-                const Icon(Icons.exit_to_app, size: 35, color: Colors.black),
-            title: const Text('Log Out',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700)),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const LogInPage())),
-          )
+          MenuListTile(
+              press: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LogInPage())),
+              text: 'Log Out',
+              icon: Icons.exit_to_app)
         ],
       ),
     );

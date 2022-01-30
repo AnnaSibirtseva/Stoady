@@ -18,7 +18,7 @@ class GroupCard extends StatelessWidget {
         onTap: press,
         child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 20, vertical: 30),
+                horizontal: 20, vertical: 15),
             child: Row(
                 children: [
                   Stack(
@@ -26,8 +26,8 @@ class GroupCard extends StatelessWidget {
                       ClipOval(
                         child: Image.network(
                           group.getAvatar(),
-                          width: 95,
-                          height: 95,
+                          width: 85,
+                          height: 85,
                           fit: BoxFit.cover,
                         ),
                       )
@@ -35,13 +35,13 @@ class GroupCard extends StatelessWidget {
                   ),
                   Expanded(
                       child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(group.getGroupName(),
                                   style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 20,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w800
                                   ),
