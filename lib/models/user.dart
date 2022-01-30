@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/models/random.dart';
 import 'package:stoady/models/statistics.dart';
 import 'package:stoady/models/task.dart';
 
@@ -8,6 +9,7 @@ class User {
   late int _id;
   late String _name;
   late String _email;
+  late String _photo = RandomFrog.getRandomAvatar();
   late String _password;
   late int _photoIndex;
   List<Statistics> statistics = [Statistics(0, 0, 28), Statistics(0, 1, 16)];
@@ -29,6 +31,19 @@ class User {
 
   String getEmail() {
     return _email;
+  }
+
+  void setMail(String mail)
+  {
+    _email = mail;
+  }
+
+  void setAvatar(String newPhoto) {
+    _photo = newPhoto;
+  }
+
+  String getAvatar() {
+    return _photo;
   }
 
   bool isSaved(Task task) {

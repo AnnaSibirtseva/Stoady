@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/menu_list_tile.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/log_in/log_in_page.dart';
+import 'package:stoady/pages/user/avatar/avatar_page.dart';
 import 'package:stoady/pages/user/group/group_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 import 'package:stoady/pages/user/saved/saved_page.dart';
@@ -27,15 +28,18 @@ class SideMenu extends StatelessWidget {
                     fontSize: 16.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.black38)),
-            currentAccountPicture: CircleAvatar(
+            currentAccountPicture: GestureDetector(child: CircleAvatar(
                 child: ClipOval(
               child: Image.network(
-                'https://ie.wampi.ru/2022/01/01/frog-prince-1.png',
+                Logic.currentUser.getAvatar(),
                 width: 95,
                 height: 95,
                 fit: BoxFit.cover,
               ),
             )),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SelectAvatarPage())),),
+
           ),
           MenuListTile(
               press: () => Navigator.push(

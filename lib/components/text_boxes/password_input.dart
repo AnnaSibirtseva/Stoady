@@ -12,6 +12,7 @@ class RoundedPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
+      isSmall: false,
       child: TextField(
         obscureText: true,
         onChanged: onChanged,

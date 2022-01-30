@@ -32,10 +32,13 @@ class Body extends StatelessWidget {
             hintText: "Name",
             icon: Icons.person_outline_rounded,
             onChanged: (value) {},
+            isSmall: false,
           ),
           RoundedInputField(
             hintText: "E-mail",
             onChanged: (value) {},
+            icon: Icons.email_outlined,
+            isSmall: false,
           ),
           RoundedPasswordField(
             onChanged: (value) {},

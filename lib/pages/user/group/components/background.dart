@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:stoady/models/logic.dart';
+import 'package:stoady/pages/user/home/home_page.dart';
+
+import 'group_card.dart';
+
 class Background extends StatelessWidget {
   final Widget child;
 
@@ -16,7 +21,8 @@ class Background extends StatelessWidget {
     return SizedBox(
         height: size.height,
         width: double.infinity,
-        child: Stack(children: <Widget>[
+        child: Stack(
+            children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -38,10 +44,29 @@ class Background extends StatelessWidget {
                   width: size.width * 0.16,
                 ),
               ),
-              SizedBox(height: size.height * 0.2, width: size.height * 0.02)
+              SizedBox(height: size.height * 0.2, width: size.height * 0.02),
             ],
           ),
-          child,
-        ]));
+          Column(children: <Widget>[
+            SizedBox(height: size.height * 0.16),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: Logic.allGroups.length,
+                    itemBuilder: (context, index) => GroupCard(
+                        group: Logic.allGroups[index],
+                        press: () => {
+                          Logic.currentGroup =
+                          Logic.allGroups[index],
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const UserHomePage())),
+                        }))),
+          ]),
+          child
+        ]
+        )
+    );
   }
 }

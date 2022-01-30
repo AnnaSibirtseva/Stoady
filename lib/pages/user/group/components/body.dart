@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/logic.dart';
-import 'package:stoady/pages/user/home/components/subject_card.dart';
-import 'package:stoady/pages/user/home/home_page.dart';
-import 'package:stoady/pages/user/subject/subject_screen.dart';
+import 'package:stoady/components/text_boxes/rounded_input.dart';
 
-import '../group_page.dart';
 import 'background.dart';
-import 'group_card.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -15,25 +10,33 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.16),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: Logic.allGroups.length,
-                    itemBuilder: (context, index) => GroupCard(
-                        group: Logic.allGroups[index],
-                        press: () => {
-                              Logic.currentGroup = Logic.allGroups[index],
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const UserHomePage())),
-                            }))),
-          ]),
-    );
+        child: Center(
+            child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.end,
+                    //crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      SizedBox(height: size.height * 0.75),
+                      Row(
+                        children: [
+                          SizedBox(width: size.width * 0.09),
+                          Align(
+                              alignment: FractionalOffset.bottomLeft,
+                              child: RoundedInputField(
+                                hintText: "Group Name",
+                                onChanged: (value) {},
+                                icon: Icons.groups_rounded,
+                                isSmall: true,
+                              )),
+                          SizedBox(width: size.width * 0.05),
+                          FloatingActionButton(
+                            //Todo: create group (but how? it's another layer)
+                            onPressed: () => {},
+                            child: const Icon(Icons.add_rounded, size: 35),
+                          )
+                        ],
+                      )
+                    ]))));
   }
 }

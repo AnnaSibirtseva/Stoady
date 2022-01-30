@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
+  final bool isSmall;
+
   const TextFieldContainer({
     Key? key,
     required this.child,
+    required this.isSmall,
   }) : super(key: key);
 
   @override
@@ -12,8 +15,8 @@ class TextFieldContainer extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * 0.8,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: isSmall ? 0.7 : 5),
+      width: isSmall ? size.width * 0.6 : size.width * 0.8,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
