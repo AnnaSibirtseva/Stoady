@@ -34,6 +34,7 @@ class Body extends StatelessWidget {
             onChanged: (value) {},
             icon: Icons.email_outlined,
             isSmall: false,
+            isAnswer: false,
           ),
           RoundedPasswordField(
             onChanged: (value) {},

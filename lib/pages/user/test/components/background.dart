@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
-import 'package:stoady/components/text_boxes/text_field_container.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
@@ -17,6 +17,7 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LearningCard.isTestingCard = true;
+
     Size size = MediaQuery.of(context).size;
     return Container(
       height: size.height,
@@ -45,7 +46,8 @@ class Background extends StatelessWidget {
                       onTap: () => {
                         Logic.addIndex(false),
                         LearningCard.showFrontSide = true,
-                        TextFieldContainer.currentState = AnswerState.empty,
+                        AnswerTextFieldContainer.currentState =
+                            AnswerState.empty,
                         (context as Element).reassemble()
                       }, // Image tapped
                       child: Image.asset('assets/images/left_arrow.png',
@@ -56,7 +58,8 @@ class Background extends StatelessWidget {
                       onTap: () => {
                         Logic.addIndex(true),
                         LearningCard.showFrontSide = true,
-                        TextFieldContainer.currentState = AnswerState.empty,
+                        AnswerTextFieldContainer.currentState =
+                            AnswerState.empty,
                         (context as Element).reassemble()
                       }, // Image tapped
                       child: Image.asset('assets/images/right_arrow.png',
@@ -76,6 +79,7 @@ class Background extends StatelessWidget {
                     },
                     icon: Icons.add,
                     isSmall: true,
+                    isAnswer: true,
                   ),
                   RoundedButton(
                       borders: false,
@@ -89,12 +93,21 @@ class Background extends StatelessWidget {
                                     Logic.currentTopic.test
                                         .questions[Logic.currentIndex]
                                         .getAnswer())
-                                  {TextFieldContainer.currentState = AnswerState.correct} else {
-                                  TextFieldContainer.currentState = AnswerState.wrong
-                                }
-                              } else {
-                              TextFieldContainer.currentState = AnswerState.empty
-                            },
+                                  {
+                                    AnswerTextFieldContainer.currentState =
+                                        AnswerState.correct
+                                  }
+                                else
+                                  {
+                                    AnswerTextFieldContainer.currentState =
+                                        AnswerState.wrong
+                                  }
+                              }
+                            else
+                              {
+                                AnswerTextFieldContainer.currentState =
+                                    AnswerState.empty
+                              },
                             (context as Element).reassemble(),
                           }),
                   child,

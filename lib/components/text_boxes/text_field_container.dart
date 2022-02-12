@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-enum AnswerState { empty, correct, wrong }
 
 class TextFieldContainer extends StatelessWidget {
-  static AnswerState currentState = AnswerState.empty;
   final Widget child;
   final bool isSmall;
 
@@ -22,18 +20,10 @@ class TextFieldContainer extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: 20, vertical: isSmall ? 0.7 : 5),
       width: isSmall ? size.width * 0.6 : size.width * 0.8,
       decoration: BoxDecoration(
-          color: currentState != AnswerState.empty
-              ? (currentState == AnswerState.correct
-                  ? const Color.fromRGBO(144, 238, 144, 0.8)
-                  : const Color.fromRGBO(255, 43, 43, 0.5))
-              : Colors.white,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(30),
           border: Border.all(
-              color: currentState != AnswerState.empty
-                  ? (currentState == AnswerState.correct
-                      ? Colors.green
-                      : Colors.red)
-                  : Colors.teal)),
+              color: Colors.teal)),
       child: child,
     );
   }
