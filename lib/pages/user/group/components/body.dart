@@ -11,13 +11,9 @@ class Body extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Background(
         child: Center(
-            child: SingleChildScrollView(
-                reverse: true,
                 child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.end,
-                    //crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      SizedBox(height: size.height * 0.75),
+                      SizedBox(height: size.height * 0.87),
                       Row(
                         children: [
                           SizedBox(width: size.width * 0.09),
@@ -37,6 +33,9 @@ class Body extends StatelessWidget {
                           )
                         ],
                       )
-                    ]))));
+                    ]
+     )
+    )
+    );
   }
 }

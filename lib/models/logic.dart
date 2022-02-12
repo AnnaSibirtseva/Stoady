@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/user.dart';
@@ -17,7 +16,7 @@ class Logic {
       0);
   static Group currentGroup = Group("HSE-SE", "https://sun9-11.userapi.com/impg/zyBbgn06vjopku_XSx6UXt_CZ48356RUScBTng/BhzAEXL_lKk.jpg?size=604x604&quality=96&sign=8763e441c85841148d4c7ce927321aa2&type=album");
 
-  static List<Group> allGroups = [currentGroup, Group("MSU Economics and Finance", "https://s.zefirka.net/images/2017-05-17/slonyata-milye-malenkie-giganty/slonyata-milye-malenkie-giganty-9.jpg")];
+  static List<Group> allGroups = [currentGroup, currentGroup, currentGroup, currentGroup, Group("MSU Economics and Finance", "https://s.zefirka.net/images/2017-05-17/slonyata-milye-malenkie-giganty/slonyata-milye-malenkie-giganty-9.jpg")];
 
   static void addIndex(bool add) {
     if(currentIndex < currentTopic.test.questions.length - 1 && add) {

@@ -10,13 +10,12 @@ class GroupPage extends StatefulWidget {
 }
 
 class _GroupPageState extends State<GroupPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
         drawer: const SideMenu(),
-        body: const Center(child: Body())
-    );
+        body: const Center(
+            child: SingleChildScrollView(reverse: true, child: Body())));
   }
 }

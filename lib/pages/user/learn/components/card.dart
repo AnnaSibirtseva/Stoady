@@ -5,6 +5,7 @@ import 'package:stoady/models/logic.dart';
 
 class LearningCard extends StatefulWidget {
   static bool showFrontSide = true;
+  static bool isTestingCard = false;
 
   const LearningCard({
     Key? key,
@@ -17,7 +18,6 @@ class LearningCard extends StatefulWidget {
 class _Card extends State<LearningCard> {
   late bool _displayFront;
   late bool _flipXAxis;
-
 
   @override
   void initState() {
@@ -38,7 +38,13 @@ class _Card extends State<LearningCard> {
 
   Widget _buildFlipAnimation() {
     return GestureDetector(
-      onTap: () => setState(() => LearningCard.showFrontSide = !LearningCard.showFrontSide),
+      onTap: () => {
+        if (!LearningCard.isTestingCard)
+          {
+            setState(
+                () => LearningCard.showFrontSide = !LearningCard.showFrontSide)
+          }
+      },
       child: AnimatedSwitcher(
         transitionBuilder: __transitionBuilder,
         duration: const Duration(milliseconds: 300),
@@ -100,9 +106,7 @@ class _Card extends State<LearningCard> {
           faceName,
           textAlign: TextAlign.center,
           style: const TextStyle(
-              fontSize: 22,
-              color: Colors.black,
-              fontWeight: FontWeight.w500),
+              fontSize: 22, color: Colors.black, fontWeight: FontWeight.w500),
         ),
       ),
     );

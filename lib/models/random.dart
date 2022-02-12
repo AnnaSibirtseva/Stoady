@@ -1,12 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
 class RandomFrog {
   static Random random = Random();
   static final List<String> _frogs = [
   'https://ie.wampi.ru/2022/01/30/frog-4.png',
-  'https://ie.wampi.ru/2022/01/30/frog-5.png',
+  'https://ie.wampi.ru/2022/02/01/frog-5.png',
   'https://ie.wampi.ru/2022/01/30/frog-6.png',
   'https://ie.wampi.ru/2022/01/30/frog-7.png',
   'https://ie.wampi.ru/2022/01/30/frog-9.png',

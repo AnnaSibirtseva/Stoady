@@ -26,7 +26,7 @@ class Background extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              SizedBox(height: size.height * 0.2, width: size.height * 0.02),
+              SizedBox(height: size.height * 0.4, width: size.width * 0.02),
               Positioned(
                   child: Image.asset(
                     "assets/images/business_frog.png",
@@ -44,11 +44,11 @@ class Background extends StatelessWidget {
                   width: size.width * 0.16,
                 ),
               ),
-              SizedBox(height: size.height * 0.2, width: size.height * 0.02),
+              SizedBox(height: size.height * 0.3, width: size.width * 0.02),
             ],
           ),
           Column(children: <Widget>[
-            SizedBox(height: size.height * 0.16),
+            SizedBox(height: size.height * 0.25),
             Expanded(
                 child: ListView.builder(
                     itemCount: Logic.allGroups.length,
@@ -63,6 +63,7 @@ class Background extends StatelessWidget {
                                   builder: (context) =>
                                   const UserHomePage())),
                         }))),
+            SizedBox(height: size.height * 0.15),
           ]),
           child
         ]

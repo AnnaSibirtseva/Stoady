@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
-import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/learn_page.dart';
+import 'package:stoady/pages/user/test/test_page.dart';
 
 import 'background.dart';
 
@@ -40,7 +40,10 @@ class Body extends StatelessWidget {
                 isSmall: true,
                 //TODO add test page
                 text: "Test",
-                press: () => {},
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TestingPage())),
               )
             ])
           ]),

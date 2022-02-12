@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
-import 'package:stoady/pages/user/learn/learn_page.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -14,6 +13,7 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    LearningCard.isTestingCard = false;
     return Container(
       height: size.height,
       width: size.width,

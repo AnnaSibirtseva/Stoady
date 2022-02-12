@@ -20,7 +20,6 @@ class AvatarRow extends StatelessWidget {
           buildRow(6, size, context),
           buildRow(9, size, context),
           buildRow(12, size, context),
-          buildRow(16, size, context),
         ]));
   }
 
