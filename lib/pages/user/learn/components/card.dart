@@ -16,14 +16,10 @@ class LearningCard extends StatefulWidget {
 }
 
 class _Card extends State<LearningCard> {
-  late bool _displayFront;
-  late bool _flipXAxis;
 
   @override
   void initState() {
     super.initState();
-    _displayFront = true;
-    _flipXAxis = true;
   }
 
   @override
