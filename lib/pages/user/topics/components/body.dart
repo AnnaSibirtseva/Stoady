@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/topic.dart';
 
@@ -22,7 +23,7 @@ class Body extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: size.height * 0.53),
             Row(children: <Widget>[
-              SizedBox(width: size.height * 0.05),
+              SizedBox(width: size.width * 0.1),
               RoundedButton(
                 borders: false,
                 reverse: false,
@@ -30,13 +31,13 @@ class Body extends StatelessWidget {
                 text: "Learn",
                 press: () => {},
               ),
-              SizedBox(width: size.height * 0.02),
+              SizedBox(width: size.width * 0.035),
               RoundedButton(
                 borders: false,
                 reverse: false,
                 isSmall: true,
                 text: "Test",
-                press: () => {},
+                press: () => {AnswerTextFieldContainer.currentState = AnswerState.empty,},
               )
             ])
           ]),

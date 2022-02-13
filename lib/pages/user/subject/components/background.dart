@@ -23,13 +23,13 @@ class Background extends StatelessWidget {
           children: <Widget>[
             Row(children: <Widget>[
               SizedBox(height: size.height * 0.2),
-              SizedBox(width: size.height * 0.04),
+              SizedBox(width: size.width * 0.07),
               Positioned(
                   child: Image.asset(
                 "assets/images/subject_lily.png",
                 width: size.width * 0.15,
               )),
-              SizedBox(width: size.height * 0.025),
+              SizedBox(width: size.width * 0.04),
               Flexible(
                 child: Text(currentSubject.getTitle(),
                     style: const TextStyle(

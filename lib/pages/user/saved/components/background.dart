@@ -21,7 +21,7 @@ class Background extends StatelessWidget {
           children: <Widget>[
             Column(
               children: <Widget>[
-                SizedBox(height: size.height * 0.12, width: size.height * 0.60),
+                SizedBox(height: size.height * 0.12, width: size.width),
                 const Flexible(
                   child: Text("Saved Questions",
                       textAlign: TextAlign.center,

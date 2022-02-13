@@ -20,7 +20,7 @@ class Background extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              SizedBox(height: size.height * 0.2, width: size.height * 0.02),
+              SizedBox(height: size.height * 0.2, width: size.width * 0.02),
               Positioned(
                   child: Image.asset(
                 "assets/images/first_frog.png",
@@ -36,7 +36,7 @@ class Background extends StatelessWidget {
                 "assets/images/second_frog.png",
                 width: size.width * 0.15,
               )),
-              SizedBox(height: size.height * 0.2, width: size.height * 0.02)
+              SizedBox(height: size.height * 0.2, width: size.width * 0.02)
             ],
           ),
           child,

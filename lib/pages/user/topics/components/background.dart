@@ -1,13 +1,3 @@
-/*ListTile(
-            leading: const Icon(Icons.star_outline_rounded,
-                size: 35, color: Colors.black),
-            title: const Text('Saved',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Montserrat")),
-            onTap: () => null,
-          )*/
 import 'package:flutter/material.dart';
 import 'package:stoady/models/topic.dart';
 
@@ -24,21 +14,21 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       height: size.height,
-      width: double.infinity,
+      width: size.width,
       // Here i can use size.width but use double.infinity because both work as a same
       child: Stack(
           //alignment: Alignment.center,
           children: <Widget>[
             Row(children: <Widget>[
-              SizedBox(height: size.height * 0.25, width: size.height * 0.04),
+              SizedBox(height: size.height * 0.25, width: size.width * 0.06),
               Positioned(
                   child: Image.asset(
                 "assets/images/topic_lily.png",
                 width: size.width * 0.17,
               )),
-              SizedBox(width: size.height * 0.025),
+              SizedBox(width: size.width * 0.03),
               Flexible(
                 child: Text(currentTopic.getTitle(),
                     style: const TextStyle(

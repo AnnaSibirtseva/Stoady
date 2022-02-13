@@ -11,7 +11,6 @@ class ScoreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return InkWell(
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

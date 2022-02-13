@@ -17,7 +17,6 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LearningCard.isTestingCard = true;
-
     Size size = MediaQuery.of(context).size;
     return Container(
       height: size.height,
@@ -29,12 +28,12 @@ class Background extends StatelessWidget {
               children: <Widget>[
                 Row(children: <Widget>[
                   SizedBox(
-                      height: size.height * 0.08, width: size.height * 0.45),
+                      height: size.height * 0.08, width: size.width * 0.85),
                   savedStar(size, context),
                 ]),
                 Column(children: <Widget>[
                   SizedBox(
-                      height: size.height * 0.17, width: size.height * 0.55),
+                      height: size.height * 0.17, width: size.width),
                   Image.asset('assets/images/learning_toad.png',
                       width: size.width * 0.13)
                 ]),
@@ -53,7 +52,7 @@ class Background extends StatelessWidget {
                       child: Image.asset('assets/images/left_arrow.png',
                           width: size.width * 0.15),
                     ),
-                    SizedBox(width: size.height * 0.372),
+                    SizedBox(width: size.width * 0.7),
                     GestureDetector(
                       onTap: () => {
                         Logic.addIndex(true),
@@ -69,7 +68,7 @@ class Background extends StatelessWidget {
                 ),
                 Column(children: <Widget>[
                   SizedBox(
-                      height: size.height * 0.235, width: size.height * 0.55),
+                      height: size.height * 0.235),
                   const LearningCard(),
                   questionsCounter(size),
                   RoundedInputField(
@@ -155,7 +154,7 @@ Widget savedStar(Size size, BuildContext context) {
 
 Widget testPath(Size size) {
   return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.05, width: size.height * 0.55),
+    SizedBox(height: size.height * 0.05, width: size.width),
     Text(
       Logic.currentTopic.getSubjectName(),
       textAlign: TextAlign.center,
@@ -173,7 +172,7 @@ Widget testPath(Size size) {
 
 Widget questionsCounter(Size size) {
   return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.01, width: size.height * 0.55),
+    SizedBox(height: size.height * 0.01, width: size.width),
     Text(
       (Logic.currentIndex + 1).toString() +
           "/" +

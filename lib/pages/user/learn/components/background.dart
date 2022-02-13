@@ -22,11 +22,11 @@ class Background extends StatelessWidget {
               //alignment: Alignment.center,
               children: <Widget>[
             Row(children: <Widget>[
-              SizedBox(height: size.height * 0.08, width: size.height * 0.45),
+              SizedBox(height: size.height * 0.08, width: size.width * 0.85),
               savedStar(size, context),
             ]),
             Column(children: <Widget>[
-              SizedBox(height: size.height * 0.2, width: size.height * 0.55),
+              SizedBox(height: size.height * 0.2, width: size.width),
               Image.asset('assets/images/learning_toad.png',
                   width: size.width * 0.13)
             ]),
@@ -43,7 +43,7 @@ class Background extends StatelessWidget {
                   child: Image.asset('assets/images/left_arrow.png',
                       width: size.width * 0.15),
                 ),
-                SizedBox(width: size.height * 0.372),
+                SizedBox(width: size.width * 0.7),
                 GestureDetector(
                   onTap: () => {
                     Logic.addIndex(true),
@@ -56,7 +56,7 @@ class Background extends StatelessWidget {
               ],
             ),
             Column(children: <Widget>[
-              SizedBox(height: size.height * 0.265, width: size.height * 0.55),
+              SizedBox(height: size.height * 0.265),
               const LearningCard(),
               child,
             ]),
@@ -103,7 +103,7 @@ Widget savedStar(Size size, BuildContext context) {
 
 Widget testPath(Size size) {
   return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.1, width: size.height * 0.55),
+    SizedBox(height: size.height * 0.1, width: size.width),
     Text(
       Logic.currentTopic.getSubjectName(),
       textAlign: TextAlign.center,
@@ -125,7 +125,7 @@ Widget testPath(Size size) {
 
 Widget questionsCounter(Size size) {
   return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.78, width: size.height * 0.55),
+    SizedBox(height: size.height * 0.78, width: size.width),
     Text(
       (Logic.currentIndex + 1).toString() +
           "/" +

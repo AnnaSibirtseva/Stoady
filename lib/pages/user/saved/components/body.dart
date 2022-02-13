@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/pages/user/learn/learn_page.dart';
 import 'package:stoady/pages/user/test/test_page.dart';
@@ -21,7 +22,7 @@ class Body extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: size.height * 0.53),
             Row(children: <Widget>[
-              SizedBox(width: size.height * 0.05),
+              SizedBox(width: size.width * 0.1),
               RoundedButton(
                 borders: false,
                 reverse: false,
@@ -31,19 +32,20 @@ class Body extends StatelessWidget {
                 press: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LearningPage(/*currentTopic: Logic.currentUser.saved*/))),
+                        builder: (context) => LearningPage())),
               ),
-              SizedBox(width: size.height * 0.02),
+              SizedBox(width: size.width * 0.05),
               RoundedButton(
                 borders: false,
                 reverse: false,
                 isSmall: true,
                 //TODO add test page
                 text: "Test",
-                press: () => Navigator.push(
+                press: () => {AnswerTextFieldContainer.currentState = AnswerState.empty,
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TestingPage())),
+                        builder: (context) => const TestingPage()))},
               )
             ])
           ]),
