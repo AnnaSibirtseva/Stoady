@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/menu_list_tile.dart';
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/pages/admin/admin_mode/admin_mode_page.dart';
 import 'package:stoady/pages/log_in/log_in_page.dart';
 import 'package:stoady/pages/user/avatar/avatar_page.dart';
 import 'package:stoady/pages/user/group/group_page.dart';
@@ -70,7 +71,8 @@ class SideMenu extends StatelessWidget {
 
           // TODO: check that person is admin in this group.
           MenuListTile(
-              press: () => {},
+              press: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const AdminModePage())),
               text: 'Admin Mode',
               icon: Icons.admin_panel_settings_outlined),
           const Divider(),
