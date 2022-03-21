@@ -106,17 +106,4 @@ class Logic {
     }
 
   }
-
-  static Future<void> getGroup() async {
-    var client = http.Client();
-    try {
-      var response = await client
-          .get(Uri.https('stoady.herokuapp.com', '/teams/$currentGroupId'));
-      currentGroup =
-          Group.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-      allSubjects = currentGroup.subjects;
-    } finally {
-      client.close();
-    }
-  }
 }

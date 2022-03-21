@@ -18,12 +18,12 @@ class GroupPage extends StatefulWidget {
 }
 
 class _GroupPageState extends State<GroupPage> {
-  late Future<List<UserGroup>> futureList;
+  late Future<List<UserGroup>> _futureList;
 
   @override
   void initState() {
     super.initState();
-    futureList = getUserGroups();
+    _futureList = getUserGroups();
   }
 
   Future<List<UserGroup>> getUserGroups() async {
@@ -32,12 +32,11 @@ class _GroupPageState extends State<GroupPage> {
       var response = await client.get(Uri.https('stoady.herokuapp.com',
           '/users/teams', {'userId': Logic.currentUser.getId().toString()}));
       if (response.statusCode == 200) {
-        return GroupMembers
-            .fromJson(
-            jsonDecode(utf8.decode(response.bodyBytes)))
+        return GroupMembers.fromJson(
+                jsonDecode(utf8.decode(response.bodyBytes)))
             .members;
       } else {
-        // todo ??
+        // todo handle exception
         throw Exception();
       }
     } finally {
@@ -47,15 +46,24 @@ class _GroupPageState extends State<GroupPage> {
 
   @override
   Widget build(BuildContext context) {
-    getUserGroups().then((value) => null);
-    print("======" + Logic.userGroups.length.toString());
     return Scaffold(
         appBar: AppBar(),
         drawer: const SideMenu(),
-        body: Center(
-          child: FutureBuilder(builder: (context) {
-            return SingleChildScrollView(reverse: true, child: Body())
-          }, future: futureList),
-        ));
+        body: FutureBuilder<List<UserGroup>>(
+            future: _futureList,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<UserGroup>> snapshot) {
+              if (snapshot.hasData) {
+                Logic.userGroups = snapshot.data!;
+                return const Center(
+                    child: SingleChildScrollView(reverse: true, child: Body()));
+              } else if (snapshot.hasError) {
+                // todo handle error
+                return Text('${snapshot.error}');
+              } else {
+                // By default, show a loading spinner.
+                return const Center(child: CircularProgressIndicator());
+              }
+            }));
   }
 }
