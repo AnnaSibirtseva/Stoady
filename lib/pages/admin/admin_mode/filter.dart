@@ -23,4 +23,12 @@ class Filter {
     }
     return " Student";
   }
+
+  bool getAdmin() {
+    return _showAdmin;
+  }
+
+  bool getStudent() {
+    return _showStudents;
+  }
 }

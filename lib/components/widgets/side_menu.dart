@@ -58,7 +58,7 @@ class SideMenu extends StatelessWidget {
               icon: Icons.bar_chart_rounded),
           MenuListTile(
               press: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const GroupPage())),
+                  MaterialPageRoute(builder: (context) => GroupPage())),
               text: 'Groups',
               icon: Icons.groups_outlined),
           MenuListTile(
