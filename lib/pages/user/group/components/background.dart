@@ -18,24 +18,23 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     // This size provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
+    Logic.getUserGroups();
     return SizedBox(
         height: size.height,
         width: double.infinity,
-        child: Stack(
-            children: <Widget>[
+        child: Stack(children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               SizedBox(height: size.height * 0.4, width: size.width * 0.02),
               Positioned(
                   child: Image.asset(
-                    "assets/images/business_frog.png",
-                    width: size.width * 0.16,
-                  )),
+                "assets/images/business_frog.png",
+                width: size.width * 0.16,
+              )),
               const Text("Groups",
-                  style: TextStyle(
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.w900)),
+                  style:
+                      TextStyle(fontSize: 35.0, fontWeight: FontWeight.w900)),
               Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
@@ -51,23 +50,22 @@ class Background extends StatelessWidget {
             SizedBox(height: size.height * 0.25),
             Expanded(
                 child: ListView.builder(
-                    itemCount: Logic.allGroups.length,
+                    itemCount: Logic.userGroups.length,
                     itemBuilder: (context, index) => GroupCard(
-                        group: Logic.allGroups[index],
+                        avatar: Logic.userGroups[index].teamAvatar,
+                        name: Logic.userGroups[index].teamName,
                         press: () => {
-                          Logic.currentGroup =
-                          Logic.allGroups[index],
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                  const UserHomePage())),
-                        }))),
+                              Logic.currentGroupId =
+                                  Logic.userGroups[index].teamId,
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const UserHomePage())),
+                            }))),
             SizedBox(height: size.height * 0.15),
           ]),
           child
-        ]
-        )
-    );
+        ]));
   }
 }

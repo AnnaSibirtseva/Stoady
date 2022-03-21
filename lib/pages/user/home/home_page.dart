@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/side_menu.dart';
+import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/home/components/body.dart';
 
 class UserHomePage extends StatefulWidget {
@@ -12,11 +13,21 @@ class UserHomePage extends StatefulWidget {
 class _UserHomePageState extends State<UserHomePage> {
 
   @override
+  void initState() {
+    super.initState();
+    Logic.getGroup();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var f =  Scaffold(
       appBar: AppBar(),
       drawer: const SideMenu(),
       body: const Center(child: Body())
     );
+    setState(() {
+
+    });
+    return f;
   }
 }

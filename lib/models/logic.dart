@@ -1,12 +1,19 @@
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/user.dart';
+import 'package:stoady/models/user_group.dart';
 
 import 'group.dart';
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+import 'group_members.dart';
+
 class Logic {
   static int currentIndex = 0;
-  static User currentUser = User(0, "Kermit", "kermit_the_frog@mail.ru", "12345", 0);
+  static User currentUser =
+      User(1, "Kermit", "kermit_the_frog@mail.ru", "12345", 0);
   static Topic currentTopic = Topic(
       0,
       "Matrices",
@@ -14,12 +21,30 @@ class Logic {
           "\n\nContains the following topics:\n  - Basics \n  - Basic Operations \n  - Main Operations \n  - Types \n",
       0,
       0);
-  static Group currentGroup = Group("HSE-SE", "https://sun9-11.userapi.com/impg/zyBbgn06vjopku_XSx6UXt_CZ48356RUScBTng/BhzAEXL_lKk.jpg?size=604x604&quality=96&sign=8763e441c85841148d4c7ce927321aa2&type=album");
 
-  static List<Group> allGroups = [currentGroup, currentGroup, currentGroup, currentGroup, Group("MSU Economics and Finance", "https://s.zefirka.net/images/2017-05-17/slonyata-milye-malenkie-giganty/slonyata-milye-malenkie-giganty-9.jpg")];
+  // static Group currentGroup = Group(
+  //     "HSE-SE",
+  //     "https://sun9-11.userapi.com/impg/zyBbgn06vjopku_XSx6UXt_CZ48356RUScBTng/BhzAEXL_lKk.jpg?size=604x604&quality=96&sign=8763e441c85841148d4c7ce927321aa2&type=album",
+  //     currentUser);
+
+  static int currentGroupId = 0;
+  static Group currentGroup = Group(" ", " ", []);
+
+  // static List<Group> allGroups = [
+  //   currentGroup,
+  //   currentGroup,
+  //   currentGroup,
+  //   currentGroup,
+  //   currentGroup,
+  //   Group(
+  //       "MSU Economics and Finance",
+  //       "https://s.zefirka.net/images/2017-05-17/slonyata-milye-malenkie-giganty/slonyata-milye-malenkie-giganty-9.jpg",
+  //       currentUser)
+  // ];
+  static List<UserGroup> userGroups = [];
 
   static void addIndex(bool add) {
-    if(currentIndex < currentTopic.test.questions.length - 1 && add) {
+    if (currentIndex < currentTopic.test.questions.length - 1 && add) {
       currentIndex++;
     } else if (currentIndex > 0 && !add) {
       currentIndex--;
@@ -38,8 +63,12 @@ class Logic {
   static String getTopicName(int id) {
     //TODO check for null
     allTopics.where((topic) => topic.getId() == id).toList();
-    return allTopics.where((topic) => topic.getId() == id).toList()[0].getTitle();
+    return allTopics
+        .where((topic) => topic.getId() == id)
+        .toList()[0]
+        .getTitle();
   }
+
   static List<Topic> allTopics = [
     Topic(
         0,
@@ -61,4 +90,33 @@ class Logic {
         0,
         1),
   ];
+
+  static Future<bool> getUserGroups() async {
+    var client = http.Client();
+    try {
+      var response = await client.get(Uri.https('stoady.herokuapp.com',
+          '/users/teams', {'userId': currentUser.getId().toString()}));
+      userGroups =
+          GroupMembers.fromJson(jsonDecode(utf8.decode(response.bodyBytes)))
+              .members;
+      print("++++++++++" + userGroups.length.toString());
+      return true;
+    } finally {
+      client.close();
+    }
+
+  }
+
+  static Future<void> getGroup() async {
+    var client = http.Client();
+    try {
+      var response = await client
+          .get(Uri.https('stoady.herokuapp.com', '/teams/$currentGroupId'));
+      currentGroup =
+          Group.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      allSubjects = currentGroup.subjects;
+    } finally {
+      client.close();
+    }
+  }
 }

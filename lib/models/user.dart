@@ -21,6 +21,10 @@ class User {
     saved.add(task);
   }
 
+  int getId() {
+    return _id;
+  }
+
   void removeTask(Task task) {
     saved.remove(task);
   }

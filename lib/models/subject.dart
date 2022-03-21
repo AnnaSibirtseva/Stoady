@@ -1,23 +1,27 @@
-import 'package:flutter/material.dart';
 
 class Subject {
-  late int _id;
-  late final String _title;
-  late final String _description;
+  late int id;
+  late final String name;
+  late final String description;
 
-  Subject(this._id,
-          this._title,
-          this._description);
+  Subject(this.id,
+          this.name,
+          this.description);
+
+  factory Subject.fromJson(dynamic json) {
+    return Subject(json['id'] as int, json['name'] as String,
+        json['description'] as String);
+  }
 
   String getTitle() {
-    return _title;
+    return name;
   }
 
   int getID() {
-    return _id;
+    return id;
   }
 
   String getDescription() {
-    return _description;
+    return description;
   }
 }

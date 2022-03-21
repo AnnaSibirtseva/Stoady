@@ -26,7 +26,7 @@ class Background extends StatelessWidget {
                 "assets/images/first_frog.png",
                 width: size.width * 0.15,
               )),
-               Text(Logic.currentGroup.getName(),
+               Text(Logic.currentGroup.name,
                   style: const TextStyle(
                       fontSize: 32.0,
                       fontWeight: FontWeight.w900,
