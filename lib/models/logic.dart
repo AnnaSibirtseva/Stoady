@@ -90,20 +90,4 @@ class Logic {
         0,
         1),
   ];
-
-  static Future<bool> getUserGroups() async {
-    var client = http.Client();
-    try {
-      var response = await client.get(Uri.https('stoady.herokuapp.com',
-          '/users/teams', {'userId': currentUser.getId().toString()}));
-      userGroups =
-          GroupMembers.fromJson(jsonDecode(utf8.decode(response.bodyBytes)))
-              .members;
-      print("++++++++++" + userGroups.length.toString());
-      return true;
-    } finally {
-      client.close();
-    }
-
-  }
 }

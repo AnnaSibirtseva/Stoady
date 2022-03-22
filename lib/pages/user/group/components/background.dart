@@ -18,7 +18,6 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     // This size provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
-    Logic.getUserGroups();
     return SizedBox(
         height: size.height,
         width: double.infinity,

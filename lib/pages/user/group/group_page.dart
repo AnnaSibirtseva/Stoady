@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:stoady/components/widgets/no_internet.dart';
 import 'package:stoady/components/widgets/side_menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:stoady/models/group_members.dart';
@@ -58,8 +59,7 @@ class _GroupPageState extends State<GroupPage> {
                 return const Center(
                     child: SingleChildScrollView(reverse: true, child: Body()));
               } else if (snapshot.hasError) {
-                // todo handle error
-                return Text('${snapshot.error}');
+                return const NoInternetWidget();
               } else {
                 // By default, show a loading spinner.
                 return const Center(child: CircularProgressIndicator());
