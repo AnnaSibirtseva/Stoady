@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/topic.dart';
+import 'package:stoady/models/topic_info.dart';
+import 'package:stoady/pages/user/learn/learn_page.dart';
 
 import 'background.dart';
 
 class Body extends StatelessWidget {
-  final Topic currentTopic;
+  final TopicInfo currentTopic;
 
   const Body({Key? key, required this.currentTopic}) : super(key: key);
 
@@ -29,7 +31,10 @@ class Body extends StatelessWidget {
                 reverse: false,
                 isSmall: true,
                 text: "Learn",
-                press: () => {},
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LearningPage())),
               ),
               SizedBox(width: size.width * 0.035),
               RoundedButton(

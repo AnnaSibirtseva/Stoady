@@ -1,29 +1,64 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:stoady/components/widgets/no_internet.dart';
 import 'package:stoady/components/widgets/side_menu.dart';
+import 'package:stoady/models/logic.dart';
 import 'package:stoady/models/subject.dart';
 
 import 'components/body.dart';
+import 'package:http/http.dart' as http;
 
 class SubjectPage extends StatefulWidget {
-  final Subject currentSubject;
-
-  const SubjectPage({Key? key, required this.currentSubject}) : super(key: key);
+  const SubjectPage({Key? key}) : super(key: key);
 
   @override
-  State<SubjectPage> createState() => _SubjectPage(currentSubject);
+  State<SubjectPage> createState() => _SubjectPage();
 }
 
 class _SubjectPage extends State<SubjectPage> {
-  final Subject currentSubject;
+  late Future<Subject> _currentSubject;
 
-  _SubjectPage(this.currentSubject);
+  @override
+  void initState() {
+    super.initState();
+    _currentSubject = getSubject();
+  }
+
+  Future<Subject> getSubject() async {
+    var client = http.Client();
+    try {
+      var response = await client.get(Uri.https(
+          'stoady.herokuapp.com', '/subjects/${Logic.currentSubjectId}'));
+      if (response.statusCode == 200) {
+        return Subject.fromJsonWithTopics(
+            jsonDecode(utf8.decode(response.bodyBytes)));
+      } else {
+        // todo handle exception
+        throw Exception();
+      }
+    } finally {
+      client.close();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
         drawer: const SideMenu(),
-        body: Center(child: Body(currentSubject: currentSubject))
-    );
+        body: FutureBuilder<Subject>(
+            future: _currentSubject,
+            builder: (BuildContext context, AsyncSnapshot<Subject> snapshot) {
+              if (snapshot.hasData) {
+                Logic.currentSubject = snapshot.data!;
+                return Center(child: Body(subject: Logic.currentSubject));
+              } else if (snapshot.hasError) {
+                return const NoInternetWidget();
+              } else {
+                // By default, show a loading spinner.
+                return const Center(child: CircularProgressIndicator());
+              }
+            }));
   }
 }

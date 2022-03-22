@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/topic.dart';
+import 'package:stoady/models/topic_info.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
-  final Topic currentTopic;
+  final TopicInfo currentTopic;
 
   const Background({
     Key? key,
@@ -30,7 +31,7 @@ class Background extends StatelessWidget {
               )),
               SizedBox(width: size.width * 0.03),
               Flexible(
-                child: Text(currentTopic.getTitle(),
+                child: Text(currentTopic.name,
                     style: const TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.w800,
@@ -42,7 +43,7 @@ class Background extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 135),
                 child: Flexible(
-                    child: Text(currentTopic.getDescription(),
+                    child: Text(currentTopic.description,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                             fontSize: 18.0,

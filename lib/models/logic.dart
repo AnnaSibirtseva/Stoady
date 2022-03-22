@@ -1,14 +1,11 @@
+import 'package:stoady/models/question.dart';
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/topic.dart';
+import 'package:stoady/models/topic_info.dart';
 import 'package:stoady/models/user.dart';
 import 'package:stoady/models/user_group.dart';
 
 import 'group.dart';
-
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-import 'group_members.dart';
 
 class Logic {
   static int currentIndex = 0;
@@ -22,14 +19,17 @@ class Logic {
       0,
       0);
 
-  // static Group currentGroup = Group(
-  //     "HSE-SE",
-  //     "https://sun9-11.userapi.com/impg/zyBbgn06vjopku_XSx6UXt_CZ48356RUScBTng/BhzAEXL_lKk.jpg?size=604x604&quality=96&sign=8763e441c85841148d4c7ce927321aa2&type=album",
-  //     currentUser);
 
   static int currentGroupId = 0;
   static Group currentGroup = Group(" ", " ", []);
 
+  static int currentSubjectId = 0;
+  static Subject currentSubject = Subject(0, " ", " ");
+
+  static int currentTopicId = 0;
+  static TopicInfo currentTopicInfo = TopicInfo.withQuestions(" ", " ", []);
+
+  static List<Question> questions = [];
   // static List<Group> allGroups = [
   //   currentGroup,
   //   currentGroup,
@@ -44,7 +44,7 @@ class Logic {
   static List<UserGroup> userGroups = [];
 
   static void addIndex(bool add) {
-    if (currentIndex < currentTopic.test.questions.length - 1 && add) {
+    if (currentIndex < questions.length - 1 && add) {
       currentIndex++;
     } else if (currentIndex > 0 && !add) {
       currentIndex--;
@@ -90,4 +90,5 @@ class Logic {
         0,
         1),
   ];
+
 }

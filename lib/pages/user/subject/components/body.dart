@@ -7,15 +7,15 @@ import 'package:stoady/pages/user/topics/topic_page.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
-  final Subject currentSubject;
+  const Body({Key? key, required this.subject}) : super(key: key);
 
-  const Body({Key? key, required this.currentSubject}) : super(key: key);
+  final Subject subject;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      currentSubject: currentSubject,
+      currentSubject: subject,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
             Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-                child: Text(currentSubject.getDescription(),
+                child: Text(subject.getDescription(),
                     textAlign: TextAlign.justify,
                     style: const TextStyle(
                         fontSize: 18.0,
@@ -32,16 +32,16 @@ class Body extends StatelessWidget {
                         color: Colors.black45))),
             Expanded(
                 child: ListView.builder(
-                    itemCount: Logic.allTopics.length,
-                    itemBuilder: (context, index) =>
-                    TopicCard(
-                        topic: Logic.allTopics[index],
-                        press: () =>  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TopicPage(currentTopic:Logic.allTopics[index]))),
-                    ),
-                    )),
+              itemCount: subject.topics.length,
+              itemBuilder: (context, index) => TopicCard(
+                topic: subject.topics[index],
+                press: () => {
+                  Logic.currentTopicId = subject.topics[index].id,
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const TopicPage()))
+                },
+              ),
+            )),
           ]),
     );
   }

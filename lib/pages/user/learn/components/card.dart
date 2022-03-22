@@ -72,7 +72,7 @@ class _Card extends State<LearningCard> {
       key: const ValueKey(true),
       backgroundColor: Colors.white,
       faceName:
-          Logic.currentTopic.test.questions[Logic.currentIndex].getQuestion(),
+          Logic.questions[Logic.currentIndex].questionText,
     );
   }
 
@@ -81,7 +81,7 @@ class _Card extends State<LearningCard> {
       key: const ValueKey(false),
       backgroundColor: Colors.white,
       faceName:
-          Logic.currentTopic.test.questions[Logic.currentIndex].getAnswer(),
+          Logic.questions[Logic.currentIndex].answerText,
     );
   }
 

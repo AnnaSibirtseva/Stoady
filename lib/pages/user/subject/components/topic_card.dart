@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/topic.dart';
+import 'package:stoady/models/topic_info.dart';
 
 class TopicCard extends StatelessWidget {
   const TopicCard({
@@ -8,7 +9,7 @@ class TopicCard extends StatelessWidget {
     required this.press,
   }) : super(key: key);
 
-  final Topic topic;
+  final TopicInfo topic;
   final VoidCallback press;
 
   @override
@@ -36,7 +37,7 @@ class TopicCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  topic.getTitle(),
+                                  topic.name,
                                   style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.black,

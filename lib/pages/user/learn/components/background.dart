@@ -105,7 +105,7 @@ Widget testPath(Size size) {
   return Column(children: <Widget>[
     SizedBox(height: size.height * 0.1, width: size.width),
     Text(
-      Logic.currentTopic.getSubjectName(),
+      Logic.currentSubject.name,
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 26,
@@ -113,7 +113,7 @@ Widget testPath(Size size) {
           fontWeight: FontWeight.w900),
     ),
     Text(
-      Logic.currentTopic.getTitle(),
+      Logic.currentTopicInfo.name,
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 22,
@@ -129,7 +129,7 @@ Widget questionsCounter(Size size) {
     Text(
       (Logic.currentIndex + 1).toString() +
           "/" +
-          Logic.currentTopic.test.questions.length.toString(),
+          Logic.questions.length.toString(),
       textAlign: TextAlign.center,
       style: const TextStyle(
           fontSize: 22,
