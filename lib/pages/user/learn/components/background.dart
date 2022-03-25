@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/components/widgets/question_counter.dart';
+import 'package:stoady/components/widgets/test_path.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
 
@@ -14,6 +16,7 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     LearningCard.isTestingCard = false;
+    int f;
     return Container(
       height: size.height,
       width: size.width,
@@ -23,14 +26,14 @@ class Background extends StatelessWidget {
               children: <Widget>[
             Row(children: <Widget>[
               SizedBox(height: size.height * 0.08, width: size.width * 0.85),
-              savedStar(size, context),
+              //savedStar(size, context),
             ]),
             Column(children: <Widget>[
               SizedBox(height: size.height * 0.2, width: size.width),
               Image.asset('assets/images/learning_toad.png',
                   width: size.width * 0.13)
             ]),
-            testPath(size),
+            const TestPath(isTest: true),
             Row(
               children: <Widget>[
                 SizedBox(height: size.height * 1),
@@ -47,6 +50,9 @@ class Background extends StatelessWidget {
                 GestureDetector(
                   onTap: () => {
                     Logic.addIndex(true),
+                    if(Logic.currentIndex == 2) {
+                      f = 0,
+                    },
                     LearningCard.showFrontSide = true,
                     (context as Element).reassemble()
                   }, // Image tapped
@@ -58,23 +64,24 @@ class Background extends StatelessWidget {
             Column(children: <Widget>[
               SizedBox(height: size.height * 0.265),
               const LearningCard(),
+              const QuestionCounter(isTest: true),
               child,
             ]),
-            questionsCounter(size),
           ])),
     );
   }
 }
 
 Widget savedStar(Size size, BuildContext context) {
-  if(Logic.currentUser.isSaved(Logic.currentTopic.test.questions[Logic.currentIndex])) {
+  if (Logic.currentUser
+      .isSaved(Logic.currentTopic.test.questions[Logic.currentIndex])) {
     return GestureDetector(
         onTap: () => {
-          (context as Element).reassemble(),
-          Logic.currentUser.removeTask(Logic
-              .currentTopic.test.questions[Logic.currentIndex]),
-          savedStar(size, context)
-        },
+              (context as Element).reassemble(),
+              Logic.currentUser.removeTask(
+                  Logic.currentTopic.test.questions[Logic.currentIndex]),
+              savedStar(size, context)
+            },
         child: Positioned(
           top: 0,
           right: 0,
@@ -86,11 +93,11 @@ Widget savedStar(Size size, BuildContext context) {
   }
   return GestureDetector(
       onTap: () => {
-        (context as Element).reassemble(),
-        Logic.currentUser.addTask(Logic
-            .currentTopic.test.questions[Logic.currentIndex]),
-        savedStar(size, context)
-      },
+            (context as Element).reassemble(),
+            Logic.currentUser
+                .addTask(Logic.currentTopic.test.questions[Logic.currentIndex]),
+            savedStar(size, context)
+          },
       child: Positioned(
         top: 0,
         right: 0,
@@ -99,42 +106,4 @@ Widget savedStar(Size size, BuildContext context) {
           width: size.width * 0.09,
         ),
       ));
-}
-
-Widget testPath(Size size) {
-  return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.1, width: size.width),
-    Text(
-      Logic.currentSubject.name,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 26,
-          color: Colors.black54,
-          fontWeight: FontWeight.w900),
-    ),
-    Text(
-      Logic.currentTopicInfo.name,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 22,
-          color: Colors.black54,
-          fontWeight: FontWeight.w700),
-    ),
-  ]);
-}
-
-Widget questionsCounter(Size size) {
-  return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.78, width: size.width),
-    Text(
-      (Logic.currentIndex + 1).toString() +
-          "/" +
-          Logic.questions.length.toString(),
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 22,
-          color: Colors.black45,
-          fontWeight: FontWeight.w700),
-    ),
-  ]);
 }

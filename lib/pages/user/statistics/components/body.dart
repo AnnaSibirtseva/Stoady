@@ -19,10 +19,10 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.16),
             Expanded(
                 child: ListView.builder(
-                  itemCount: Logic.currentUser.statistics.length,
+                  itemCount: Logic.statistics.length,
                   itemBuilder: (context, index) =>
                       ScoreCard(
-                        statistics: Logic.currentUser.statistics[index]
+                        currentResult: Logic.statistics[index]
                       ),
                 )),
           ]),

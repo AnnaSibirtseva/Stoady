@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
+import 'package:stoady/models/logic.dart';
 import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/topic_info.dart';
 import 'package:stoady/pages/user/learn/learn_page.dart';
+import 'package:stoady/pages/user/test/test_page.dart';
 
 import 'background.dart';
 
@@ -14,9 +16,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Background(
       currentTopic: currentTopic,
       child: Column(
@@ -31,10 +31,13 @@ class Body extends StatelessWidget {
                 reverse: false,
                 isSmall: true,
                 text: "Learn",
-                press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LearningPage())),
+                press: () => {
+                  Logic.currentIndex = 0,
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LearningPage()))
+                },
               ),
               SizedBox(width: size.width * 0.035),
               RoundedButton(
@@ -42,7 +45,14 @@ class Body extends StatelessWidget {
                 reverse: false,
                 isSmall: true,
                 text: "Test",
-                press: () => {AnswerTextFieldContainer.currentState = AnswerState.empty,},
+                press: () => {
+                  AnswerTextFieldContainer.currentState = AnswerState.empty,
+                  Logic.currentIndex = 0,
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TestingPage()))
+                },
               )
             ])
           ]),

@@ -1,4 +1,5 @@
 import 'package:stoady/models/question.dart';
+import 'package:stoady/models/result.dart';
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/topic_info.dart';
@@ -30,6 +31,8 @@ class Logic {
   static TopicInfo currentTopicInfo = TopicInfo.withQuestions(" ", " ", []);
 
   static List<Question> questions = [];
+
+  static List<Result> statistics = [];
   // static List<Group> allGroups = [
   //   currentGroup,
   //   currentGroup,
@@ -60,35 +63,35 @@ class Logic {
         "Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. "),
   ];
 
-  static String getTopicName(int id) {
-    //TODO check for null
-    allTopics.where((topic) => topic.getId() == id).toList();
-    return allTopics
-        .where((topic) => topic.getId() == id)
-        .toList()[0]
-        .getTitle();
-  }
+  // static String getTopicName(int id) {
+  //   //TODO check for null
+  //   allTopics.where((topic) => topic.getId() == id).toList();
+  //   return allTopics
+  //       .where((topic) => topic.getId() == id)
+  //       .toList()[0]
+  //       .getTitle();
+  // }
 
-  static List<Topic> allTopics = [
-    Topic(
-        0,
-        "Matrices",
-        "In mathematics, a matrix (plural matrices) is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object." +
-            "\n\nContains the following topics:\n  - Basics \n  - Basic Operations \n  - Main Operations \n  - Types \n",
-        0,
-        0),
-    Topic(
-        1,
-        "Vectors",
-        "Probability theory is the branch of mathematics concerned with probability.",
-        0,
-        1),
-    Topic(
-        2,
-        "Complex numbers",
-        "Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. ",
-        0,
-        1),
-  ];
+  // static List<Topic> allTopics = [
+  //   Topic(
+  //       0,
+  //       "Matrices",
+  //       "In mathematics, a matrix (plural matrices) is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object." +
+  //           "\n\nContains the following topics:\n  - Basics \n  - Basic Operations \n  - Main Operations \n  - Types \n",
+  //       0,
+  //       0),
+  //   Topic(
+  //       1,
+  //       "Vectors",
+  //       "Probability theory is the branch of mathematics concerned with probability.",
+  //       0,
+  //       1),
+  //   Topic(
+  //       2,
+  //       "Complex numbers",
+  //       "Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. ",
+  //       0,
+  //       1),
+  // ];
 
 }

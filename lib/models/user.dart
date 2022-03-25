@@ -12,7 +12,6 @@ class User {
   late String _photo = RandomFrog.getRandomAvatar();
   late String _password;
   late int _photoIndex;
-  List<Statistics> statistics = [Statistics(0, 0, 28), Statistics(0, 1, 16)];
   List<Task> saved = [];
 
   User(this._id, this._name, this._email, this._password, this._photoIndex);

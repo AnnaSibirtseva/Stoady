@@ -1,19 +1,12 @@
-import 'package:flutter/material.dart';
-
-import 'logic.dart';
+import 'package:stoady/models/result.dart';
 
 class Statistics {
-  late int _userID;
-  late int _topicID;
-  late int _lastScore;
+  late List<Result> results = [];
 
-  Statistics(this._userID, this._topicID, this._lastScore);
+  Statistics(this.results);
 
-  String getTopic() {
-    return Logic.getTopicName(_topicID);
-  }
-
-  int getLastScore() {
-    return _lastScore;
+  factory Statistics.fromJson(dynamic json) {
+    return Statistics(
+        (json['results'] as List).map((e) => Result.fromJson(e)).toList());
   }
 }

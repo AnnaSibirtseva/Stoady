@@ -24,6 +24,8 @@ class _LearningPage extends State<LearningPage> {
   @override
   void initState() {
     super.initState();
+    // Since field is static we should reset it.
+    //Logic.currentIndex = 0;
     _futureQuestions = getQuestions();
   }
 

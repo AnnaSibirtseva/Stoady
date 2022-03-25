@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
+import 'package:stoady/components/widgets/question_counter.dart';
+import 'package:stoady/components/widgets/question_counter.dart';
+import 'package:stoady/components/widgets/test_path.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
 
@@ -32,12 +35,11 @@ class Background extends StatelessWidget {
                   savedStar(size, context),
                 ]),
                 Column(children: <Widget>[
-                  SizedBox(
-                      height: size.height * 0.17, width: size.width),
+                  SizedBox(height: size.height * 0.17, width: size.width),
                   Image.asset('assets/images/learning_toad.png',
                       width: size.width * 0.13)
                 ]),
-                testPath(size),
+                const TestPath(isTest: true),
                 Row(
                   children: <Widget>[
                     SizedBox(height: size.height * 1),
@@ -67,10 +69,9 @@ class Background extends StatelessWidget {
                   ],
                 ),
                 Column(children: <Widget>[
-                  SizedBox(
-                      height: size.height * 0.235),
+                  SizedBox(height: size.height * 0.235),
                   const LearningCard(),
-                  questionsCounter(size),
+                  const QuestionCounter(isTest: true),
                   RoundedInputField(
                     hintText: "Answer",
                     onChanged: (value) {
@@ -89,12 +90,15 @@ class Background extends StatelessWidget {
                             if (currentAnswer.isNotEmpty)
                               {
                                 if (currentAnswer ==
-                                    Logic.currentTopic.test
-                                        .questions[Logic.currentIndex]
-                                        .getAnswer())
+                                    Logic.questions[Logic.currentIndex]
+                                        .answerText)
                                   {
                                     AnswerTextFieldContainer.currentState =
-                                        AnswerState.correct
+                                        AnswerState.correct,
+                                    // Logic.addIndex(true),
+                                    // (context as Element).reassemble(),
+                                    // AnswerTextFieldContainer.currentState =
+                                    //     AnswerState.empty
                                   }
                                 else
                                   {
@@ -150,36 +154,4 @@ Widget savedStar(Size size, BuildContext context) {
           width: size.width * 0.09,
         ),
       ));
-}
-
-Widget testPath(Size size) {
-  return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.05, width: size.width),
-    Text(
-      Logic.currentTopic.getSubjectName(),
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 26, color: Colors.black54, fontWeight: FontWeight.w900),
-    ),
-    Text(
-      Logic.currentTopic.getTitle(),
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 22, color: Colors.black54, fontWeight: FontWeight.w700),
-    ),
-  ]);
-}
-
-Widget questionsCounter(Size size) {
-  return Column(children: <Widget>[
-    SizedBox(height: size.height * 0.01, width: size.width),
-    Text(
-      (Logic.currentIndex + 1).toString() +
-          "/" +
-          Logic.currentTopic.test.questions.length.toString(),
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontSize: 22, color: Colors.black45, fontWeight: FontWeight.w700),
-    ),
-  ]);
 }

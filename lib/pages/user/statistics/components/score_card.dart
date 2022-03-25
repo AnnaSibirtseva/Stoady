@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/statistics.dart';
+import 'package:stoady/models/result.dart';
 
 class ScoreCard extends StatelessWidget {
   const ScoreCard({
     Key? key,
-    required this.statistics,
+    required this.currentResult,
   }) : super(key: key);
 
-  final Statistics statistics;
+  final Result currentResult;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ScoreCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 12),
                       child: Text(
-                        statistics.getTopic(),
+                        currentResult.name,
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                             fontSize: 20,
@@ -41,7 +41,7 @@ class ScoreCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 12),
                       child: Text(
-                        statistics.getLastScore().toString() + "%",
+                        currentResult.result.toString() + "%",
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.right,
                         style: const TextStyle(

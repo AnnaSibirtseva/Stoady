@@ -37,6 +37,7 @@ class Body extends StatelessWidget {
                 topic: subject.topics[index],
                 press: () => {
                   Logic.currentTopicId = subject.topics[index].id,
+                  Logic.currentTopicInfo = subject.topics[index],
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const TopicPage()))
                 },
