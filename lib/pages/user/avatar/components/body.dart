@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 35.0, fontWeight: FontWeight.w900)),
               //SizedBox(height: size.height * 0.53),
-              AvatarRow(photos: RandomFrog.getPhotos())
+              AvatarRow(photos: Avatar.getPhotos())
             ]));
   }
 }

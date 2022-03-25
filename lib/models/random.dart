@@ -1,6 +1,6 @@
 import 'dart:math';
 
-class RandomFrog {
+class Avatar {
   static Random random = Random();
   static final List<String> _frogs = [
   'https://ie.wampi.ru/2022/01/30/frog-4.png',

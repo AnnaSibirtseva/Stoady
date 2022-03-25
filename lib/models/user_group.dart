@@ -14,4 +14,11 @@ class UserGroup {
     return UserGroup(json['teamId'] as int, json['role'] as String,
         json['teamName'] as String, json['teamAvatar'] as String);
   }
+
+  bool isAdmin() {
+    if (role == Role.Admin || role == Role.Creator) {
+      return true;
+    }
+    return false;
+  }
 }

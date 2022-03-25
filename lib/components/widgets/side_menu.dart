@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/menu_list_tile.dart';
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/models/user_group.dart';
 import 'package:stoady/pages/admin/admin_mode/admin_mode_page.dart';
 import 'package:stoady/pages/log_in/log_in_page.dart';
 import 'package:stoady/pages/user/avatar/avatar_page.dart';
@@ -29,18 +30,21 @@ class SideMenu extends StatelessWidget {
                     fontSize: 16.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.black38)),
-            currentAccountPicture: GestureDetector(child: CircleAvatar(
-                child: ClipOval(
-              child: Image.network(
-                Logic.currentUser.getAvatar(),
-                width: 95,
-                height: 95,
-                fit: BoxFit.cover,
-              ),
-            )),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SelectAvatarPage())),),
-
+            currentAccountPicture: GestureDetector(
+              child: CircleAvatar(
+                  child: ClipOval(
+                child: Image.network(
+                  Logic.currentUser.getAvatar(),
+                  width: 95,
+                  height: 95,
+                  fit: BoxFit.cover,
+                ),
+              )),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SelectAvatarPage())),
+            ),
           ),
           MenuListTile(
               press: () => Navigator.push(
@@ -48,6 +52,7 @@ class SideMenu extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const SavedQuestionsPage())),
               text: 'Saved',
+              canClick: true,
               icon: Icons.star_outline_rounded),
           MenuListTile(
               press: () => Navigator.push(
@@ -55,11 +60,13 @@ class SideMenu extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const StatisticsPage())),
               text: 'Statistics',
+              canClick: true,
               icon: Icons.bar_chart_rounded),
           MenuListTile(
               press: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => GroupPage())),
               text: 'Groups',
+              canClick: true,
               icon: Icons.groups_outlined),
           MenuListTile(
               press: () => Navigator.push(
@@ -67,22 +74,40 @@ class SideMenu extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const UserHomePage())),
               text: 'Subjects',
+              canClick: true,
               icon: Icons.library_books_outlined),
 
           // TODO: check that person is admin in this group.
           MenuListTile(
-              press: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AdminModePage())),
+              press: () => {
+                    isAdmin()
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AdminModePage()))
+                        : {}
+                  },
               text: 'Admin Mode',
+              canClick: isAdmin(),
               icon: Icons.admin_panel_settings_outlined),
           const Divider(),
           MenuListTile(
               press: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const LogInPage())),
               text: 'Log Out',
+              canClick: true,
               icon: Icons.exit_to_app)
         ],
       ),
     );
   }
+}
+
+bool isAdmin() {
+  List<UserGroup> list = (Logic.userGroups
+      .where((group) => group.teamId == Logic.currentGroupId)).toList();
+  if (list.isNotEmpty) {
+    return list[0].isAdmin();
+  }
+  return false;
 }

@@ -9,7 +9,7 @@ class User {
   late int _id;
   late String _name;
   late String _email;
-  late String _photo = RandomFrog.getRandomAvatar();
+  late String _photo = Avatar.getRandomAvatar();
   late String _password;
   late int _photoIndex;
   List<Task> saved = [];
