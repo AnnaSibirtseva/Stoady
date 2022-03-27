@@ -8,9 +8,11 @@ class PersonCard extends StatelessWidget {
   const PersonCard({
     Key? key,
     required this.user,
+    required this.isCreator,
   }) : super(key: key);
 
   final Member user;
+  final bool isCreator;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,11 @@ class PersonCard extends StatelessWidget {
           if (Logic.members.members.length > 1) {
             showSnackBar(context, user.email);
             removeUser(user.id, context);
+          } else if (user.role == Role.Creator) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("You can't delete creator"),
+            ));
+            return false;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('There must be at least one user in the group'),
@@ -33,7 +40,8 @@ class PersonCard extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: const Text("Confirm"),
-                content: const Text("Are you sure you wish to delete this item?"),
+                content:
+                const Text("Are you sure you wish to delete this item?"),
                 actions: <Widget>[
                   TextButton(
                     child: const Text('CANCEL'),
@@ -64,19 +72,25 @@ class PersonCard extends StatelessWidget {
                           children: [
                             Text(
                               user.email,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: isCreator
+                                      ? FontWeight.w700
+                                      : FontWeight.w400),
                             ),
                             const SizedBox(height: 3),
                           ]))),
               Switch(
                 value: user.isAdmin(),
                 onChanged: (value) {
-                  if (!user.isAdmin() ||
-                      Logic.members.anyAdmin()) {
-                    Logic.members.changeAbility(user);
+                  if (user.role == Role.Creator) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content:
+                      Text("You can't change creator's role."),
+                    ));
+                  } else if (!user.isAdmin() || Logic.members.anyAdmin()) {
+                    changeUserRole(user, context);
                     //userState = !userState;
                     (context as Element).reassemble();
                   } else {
@@ -88,6 +102,7 @@ class PersonCard extends StatelessWidget {
                 },
                 activeTrackColor: Colors.lightGreen,
                 activeColor: Colors.green,
+                activeThumbImage: const AssetImage("assets/images/admin.png"),
               ),
             ])));
   }
@@ -123,14 +138,14 @@ class PersonCard extends StatelessWidget {
               child: const Text('CANCEL'),
               onPressed: () {
                 Navigator.of(context).pop();
-                answer =  false;
+                answer = false;
               },
             ),
             TextButton(
               child: const Text('ACCEPT'),
               onPressed: () {
                 Navigator.of(context).pop();
-                answer =  true;
+                answer = true;
               },
             )
           ],
@@ -145,9 +160,15 @@ Future<void> removeUser(int userId, BuildContext context) async {
   var client = http.Client();
   try {
     var response = await http.delete(
-        Uri.https('stoady.herokuapp.com', '/teams/${Logic.currentGroupId}/members/remove', {'userId': userId.toString()}),
+        Uri.https(
+            'stoady.herokuapp.com',
+            '/teams/${Logic.currentGroupId}/members/remove',
+            {'userId': userId.toString()}),
         headers: {'executorId': Logic.currentUser.id.toString()});
-    Logic.members.members.remove((Logic.members.members).where((element) => element.id == userId).first);
+    Logic.members.members.remove(
+        (Logic.members.members)
+            .where((element) => element.id == userId)
+            .first);
     (context as Element).reassemble();
     if (response.statusCode != 200) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -158,17 +179,22 @@ Future<void> removeUser(int userId, BuildContext context) async {
   }
 }
 
-Future<void> changeUserRole(int userId, BuildContext context, Role role) async {
+Future<void> changeUserRole(Member user, BuildContext context) async {
   var client = http.Client();
   try {
+    Logic.members.changeAbility(user);
     var response = await http.put(
-        Uri.https('stoady.herokuapp.com', '/teams/${Logic.currentGroupId}/members/', {'userId': userId.toString(), 'userRole': role.toString()}),
+        Uri.https(
+            'stoady.herokuapp.com', '/teams/${Logic.currentGroupId}/members/', {
+          'userId': user.id.toString(),
+          'userRole': user.role.toString().substring(5)
+        }),
         headers: {'executorId': Logic.currentUser.id.toString()});
-    Logic.members.members.remove((Logic.members.members).where((element) => element.id == userId).first);
-    (context as Element).reassemble();
     if (response.statusCode != 200) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Something went wrong, user wasn't removed.")));
+          content: Text("Something went wrong, role wasn't changed.")));
+    } else {
+      (context as Element).reassemble();
     }
   } finally {
     client.close();

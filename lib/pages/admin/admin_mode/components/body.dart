@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/logic.dart';
-import 'package:stoady/pages/admin/admin_mode/components/person_card.dart';
+import 'package:http/http.dart' as http;
+import 'package:stoady/pages/admin/admin_mode/admin_mode_page.dart';
 import 'package:stoady/pages/admin/admin_mode/filter.dart';
 
 import 'background.dart';
@@ -13,65 +14,98 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    String userMail = "";
+    Size size = MediaQuery.of(context).size;
     return Background(
         child: Center(
-          child: Column(children: <Widget>[
-          SizedBox(height: size.height * 0.15),
+            child: Column(children: <Widget>[
+      SizedBox(height: size.height * 0.15),
+      Row(
+        children: [
+          SizedBox(width: size.width * 0.1),
+          Align(
+              alignment: FractionalOffset.bottomLeft,
+              child: RoundedInputField(
+                hintText: "Add Student",
+                onChanged: (value) {
+                  userMail = value;
+                },
+                icon: Icons.groups_rounded,
+                isSmall: true,
+                isAnswer: false,
+              )),
+          SizedBox(width: size.width * 0.05),
+          FloatingActionButton(
+            onPressed: () async {
+              var client = http.Client();
+              try {
+                var response = await http.post(
+                    Uri.https(
+                        'stoady.herokuapp.com',
+                        '/teams/${Logic.currentGroupId}/members/add',
+                        {'email': userMail}),
+                    headers: {'executorId': Logic.currentUser.id.toString()});
+                if (response.statusCode == 200) {
+                  // Rebuilding page with groups.
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const AdminModePage()));
+                } else {
+                  AlertDialog(
+                    title: const Text("Add Failed."),
+                    content: const Text(
+                        "The user has not been added, check that the mail is entered correctly."),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                      )
+                    ],
+                  );
+                }
+              } finally {
+                client.close();
+              }
+            },
+            child: const Icon(Icons.add_rounded, size: 35),
+          ),
+          SizedBox(width: size.width * 0.05),
+        ],
+      ),
+      Column(
+        children: <Widget>[
+          SizedBox(height: size.height * 0.07),
           Row(
-            children: [
-              SizedBox(width: size.width * 0.1),
-              Align(
-                  alignment: FractionalOffset.bottomLeft,
-                  child: RoundedInputField(
-                    hintText: "Add Student",
-                    onChanged: (value) {},
-                    icon: Icons.groups_rounded,
-                    isSmall: true,
-                    isAnswer: false,
-                  )),
-              SizedBox(width: size.width * 0.05),
-              FloatingActionButton(
-                //Todo: add student (but how? it's another layer)
-                onPressed: () => {},
-                child: const Icon(Icons.add_rounded, size: 35),
-              ),
-              SizedBox(width: size.width * 0.05),
-            ],
-          ),
-          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              SizedBox(height: size.height * 0.07),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  drawFilterChip("admin", context),
-                  drawFilterChip("student", context),
-                ],
-              ),
+              drawFilterChip("admin", context),
+              drawFilterChip("student", context),
             ],
           ),
-          SizedBox(height: size.height * 0.42),
-          ElevatedButton(
-            child: const Text(
-              "Manage Subjects",
-              style:  TextStyle(
-                  fontSize: 24.0,
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                primary: Colors.teal,
-                // Moves text in the button.
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 25, vertical: 7)),
-            onPressed: () => {},
-          )
-        ])));
+        ],
+      ),
+      SizedBox(height: size.height * 0.42),
+      ElevatedButton(
+        child: const Text(
+          "Manage Subjects",
+          style: TextStyle(
+              fontSize: 24.0,
+              fontFamily: 'Nunito',
+              fontWeight: FontWeight.w700,
+              color: Colors.white),
+        ),
+        style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            primary: Colors.teal,
+            // Moves text in the button.
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7)),
+        onPressed: () => {},
+      )
+    ])));
   }
 }
 

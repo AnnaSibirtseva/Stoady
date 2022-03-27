@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/models/member.dart';
+import 'package:stoady/models/role.dart';
 import 'package:stoady/models/user.dart';
 import 'package:stoady/pages/admin/admin_mode/components/person_card.dart';
 
@@ -71,13 +72,16 @@ class Background extends StatelessWidget {
   Widget buildItem(BuildContext context, int index) {
     Member curUser = Logic.members.members.elementAt(index);
     if (Filter.getBool("admin")) {
+      if (curUser.role == Role.Creator) {
+        return PersonCard(user: curUser, isCreator: true);
+      }
       if (Logic.members.members.where((element) => element.id == curUser.id).first.isAdmin()) {
-        return PersonCard(user: curUser);
+        return PersonCard(user: curUser, isCreator: false);
       }
     }
     if (Filter.getBool("student")) {
       if (!(Logic.members.members.where((element) => element.id == curUser.id).first.isAdmin())) {
-        return PersonCard(user: curUser);
+        return PersonCard(user: curUser, isCreator: false);
       }
     }
     // Костыль, потому что надо возвращать виджет.

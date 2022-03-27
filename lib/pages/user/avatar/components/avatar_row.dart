@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
+
+import 'package:http/http.dart' as http;
 
 class AvatarRow extends StatelessWidget {
   const AvatarRow({
@@ -35,6 +39,7 @@ class AvatarRow extends StatelessWidget {
             )),
         onTap: () => {
               Logic.currentUser.avatarId = index,
+              changeAvatar(index),
               (context as Element).reassemble(),
             });
   }
@@ -50,5 +55,21 @@ class AvatarRow extends StatelessWidget {
       ]),
       SizedBox(height: size.height * 0.025, width: size.width * 0.1),
     ]);
+  }
+
+  Future<void> changeAvatar(int newIndex) async {
+    var client = http.Client();
+    try {
+      var response = await client.put(Uri.https(
+          'stoady.herokuapp.com',
+          '/users/${Logic.currentUser.id}/avatar/set',
+          {'avatarId': newIndex.toString()}));
+      if (response.statusCode != 200) {
+        // todo handle exception
+        throw Exception();
+      }
+    } finally {
+      client.close();
+    }
   }
 }
