@@ -29,6 +29,7 @@ class _TestingPage extends State<TestingPage> {
     // Since field is static we should reset it.
     LearningCard.showFrontSide = true;
     _futureQuestions = getQuestions();
+    Logic.currentIndex = 0;
   }
 
   Future<List<Question>> getQuestions() async {

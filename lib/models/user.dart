@@ -1,56 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/models/auth_info.dart';
+import 'package:stoady/models/question.dart';
 import 'package:stoady/models/random.dart';
-import 'package:stoady/models/statistics.dart';
-import 'package:stoady/models/task.dart';
-
-import 'logic.dart';
 
 class User {
-  late int _id;
-  late String _name;
-  late String _email;
-  late String _photo = Avatar.getRandomAvatar();
-  late String _password;
-  late int _photoIndex;
-  List<Task> saved = [];
+  late int id;
+  late String name;
+  late String email;
+  late String password;
+  late int avatarId;
+  List<Question> saved = [];
 
-  User(this._id, this._name, this._email, this._password, this._photoIndex);
+  User(this.id, this.name, this.email, this.password, this.avatarId);
 
-  void addTask(Task task) {
-    saved.add(task);
+  User.auth(this.id, this.name, this.avatarId);
+
+  factory User.fromJson(dynamic json) {
+    return User.auth(
+        json['id'] as int, json['name'] as String, json['avatarId'] as int);
+  }
+
+  void setMailPassword(AuthInfo info) {
+     email = info.email;
+     password = info.password;
   }
 
   int getId() {
-    return _id;
-  }
-
-  void removeTask(Task task) {
-    saved.remove(task);
+    return id;
   }
 
   String getName() {
-    return _name;
+    return name;
   }
 
   String getEmail() {
-    return _email;
+    return email;
   }
 
-  void setMail(String mail)
-  {
-    _email = mail;
-  }
-
-  void setAvatar(String newPhoto) {
-    _photo = newPhoto;
+  void setMail(String mail) {
+    email = mail;
   }
 
   String getAvatar() {
-    return _photo;
+    return Avatar.getAvatar(avatarId);
   }
 
-  bool isSaved(Task task) {
-    if (saved.contains(task)) {
+  bool isSaved(Question question) {
+    if (saved.any((element) => element.id == question.id)) {
       return true;
     }
     return false;

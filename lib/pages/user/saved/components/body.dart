@@ -29,10 +29,12 @@ class Body extends StatelessWidget {
                 isSmall: true,
                 text: "Learn",
                 // TODO add learn page
-                press: () => Navigator.push(
+                press: () => {
+                  LearningPage.isSaved = true,
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LearningPage())),
+                        builder: (context) => LearningPage()))},
               ),
               SizedBox(width: size.width * 0.05),
               RoundedButton(

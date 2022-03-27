@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stoady/pages/log_in/log_in_page.dart';
 import 'package:stoady/pages/user/group/group_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Nunito',
         primarySwatch: Colors.teal,
       ),
-      home: const GroupPage(),
+      home: const LogInPage(),
     );
   }
 }

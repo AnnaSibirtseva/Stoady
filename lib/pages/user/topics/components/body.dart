@@ -32,6 +32,7 @@ class Body extends StatelessWidget {
                 isSmall: true,
                 text: "Learn",
                 press: () => {
+                  LearningPage.isSaved = false,
                   Logic.currentIndex = 0,
                   Navigator.push(
                       context,

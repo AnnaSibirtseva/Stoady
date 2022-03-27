@@ -10,4 +10,10 @@ class TopicTest {
         .map((e) => Question.fromJsonWithInfo(e))
         .toList());
   }
+
+  factory TopicTest.savedFromJson(dynamic json) {
+    return TopicTest((json['savedQuestions'] as List)
+        .map((e) => Question.fromJsonWithInfo(e))
+        .toList());
+  }
 }

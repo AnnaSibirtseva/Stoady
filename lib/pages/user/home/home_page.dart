@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:stoady/components/widgets/empty.dart';
 import 'package:stoady/components/widgets/no_internet.dart';
 import 'package:stoady/components/widgets/side_menu.dart';
 import 'package:stoady/models/group.dart';
@@ -42,6 +43,9 @@ class _UserHomePageState extends State<UserHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (Logic.currentGroupId == -1) {
+      return const NothingFoundWidget(text: 'No Group Selected');
+    }
     return Scaffold(
         appBar: AppBar(),
         drawer: const SideMenu(),

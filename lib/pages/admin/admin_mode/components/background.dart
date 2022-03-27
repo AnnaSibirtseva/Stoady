@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/models/member.dart';
 import 'package:stoady/models/user.dart';
 import 'package:stoady/pages/admin/admin_mode/components/person_card.dart';
 
@@ -57,7 +58,7 @@ class Background extends StatelessWidget {
               SizedBox(height: size.height * 0.4),
               Expanded(
                   child: ListView.builder(
-                      itemCount: Logic.currentGroup.userInfo.length,
+                      itemCount: Logic.members.members.length,
                       itemBuilder: (context, index) =>
                           buildItem(context, index))),
               SizedBox(height: size.height * 0.2),
@@ -68,15 +69,15 @@ class Background extends StatelessWidget {
   }
 
   Widget buildItem(BuildContext context, int index) {
-    User curUser = Logic.currentGroup.userInfo.keys.elementAt(index);
+    Member curUser = Logic.members.members.elementAt(index);
     if (Filter.getBool("admin")) {
-      if (Logic.currentGroup.userInfo[curUser]) {
-        return PersonCard(user: Logic.currentGroup.userInfo.keys.elementAt(index));
+      if (Logic.members.members.where((element) => element.id == curUser.id).first.isAdmin()) {
+        return PersonCard(user: curUser);
       }
     }
     if (Filter.getBool("student")) {
-      if (!(Logic.currentGroup.userInfo[curUser])) {
-        return PersonCard(user: Logic.currentGroup.userInfo.keys.elementAt(index));
+      if (!(Logic.members.members.where((element) => element.id == curUser.id).first.isAdmin())) {
+        return PersonCard(user: curUser);
       }
     }
     // Костыль, потому что надо возвращать виджет.

@@ -10,9 +10,9 @@ import 'package:stoady/pages/user/learn/components/background.dart';
 import 'package:http/http.dart' as http;
 
 class LearningPage extends StatefulWidget {
-  const LearningPage({
-    Key? key,
-  }) : super(key: key);
+  static bool isSaved = false;
+
+  const LearningPage({Key? key}) : super(key: key);
 
   @override
   State<LearningPage> createState() => _LearningPage();
@@ -20,22 +20,45 @@ class LearningPage extends StatefulWidget {
 
 class _LearningPage extends State<LearningPage> {
   late Future<List<Question>> _futureQuestions;
+  late Future<List<Question>> _futureSavedQuestions;
+  late bool isSaved;
 
   @override
   void initState() {
     super.initState();
     // Since field is static we should reset it.
-    //Logic.currentIndex = 0;
-    _futureQuestions = getQuestions();
+    Logic.currentIndex = 0;
+    isSaved = LearningPage.isSaved;
+    _futureSavedQuestions = getSavedQuestions();
+    _futureQuestions = isSaved ? _futureSavedQuestions : getQuestions();
   }
 
   Future<List<Question>> getQuestions() async {
+    Logic.currentUser.saved = await _futureSavedQuestions;
     var client = http.Client();
     try {
       var response = await client.get(Uri.https(
           'stoady.herokuapp.com', '/questions/${Logic.currentTopicId}'));
       if (response.statusCode == 200) {
         return TopicTest.fromJson(jsonDecode(utf8.decode(response.bodyBytes)))
+            .questions;
+      } else {
+        // todo handle exception
+        throw Exception();
+      }
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<List<Question>> getSavedQuestions() async {
+    var client = http.Client();
+    try {
+      var response = await client.get(Uri.https(
+          'stoady.herokuapp.com', '/questions/saved/${Logic.currentUser.id}'));
+      if (response.statusCode == 200) {
+        return TopicTest.savedFromJson(
+                jsonDecode(utf8.decode(response.bodyBytes)))
             .questions;
       } else {
         // todo handle exception
@@ -57,6 +80,9 @@ class _LearningPage extends State<LearningPage> {
                 (BuildContext context, AsyncSnapshot<List<Question>> snapshot) {
               if (snapshot.hasData) {
                 Logic.questions = snapshot.data!;
+                if (isSaved) {
+                  Logic.currentUser.saved = snapshot.data!;
+                }
                 if (Logic.questions.isNotEmpty) {
                   return Center(child: Background(child: Container()));
                 }

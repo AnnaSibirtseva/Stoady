@@ -34,7 +34,7 @@ class AvatarRow extends StatelessWidget {
               fit: BoxFit.cover,
             )),
         onTap: () => {
-              Logic.currentUser.setAvatar(photos[index]),
+              Logic.currentUser.avatarId = index,
               (context as Element).reassemble(),
             });
   }

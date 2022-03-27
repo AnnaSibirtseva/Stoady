@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/group.dart';
 import 'package:stoady/models/logic.dart';
-import 'package:stoady/models/user.dart';
+import 'package:stoady/models/member.dart';
+import 'package:http/http.dart' as http;
+import 'package:stoady/models/role.dart';
 
 class PersonCard extends StatelessWidget {
   const PersonCard({
@@ -9,18 +10,18 @@ class PersonCard extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final User user;
+  final Member user;
 
   @override
   Widget build(BuildContext context) {
-    bool userState = Logic.currentGroup.userInfo[user];
+    //bool userState = Logic.currentGroup.userInfo[user];
     return Dismissible(
-        key: Key(user.getEmail()),
+        key: Key(user.email),
         confirmDismiss: (DismissDirection direction) async {
           //TODO: check that user is hthe only admin -> no delete.
-          if (Logic.currentGroup.userInfo.length > 1) {
-            showSnackBar(context, user.getEmail());
-            Logic.currentGroup.deleteUser(user);
+          if (Logic.members.members.length > 1) {
+            showSnackBar(context, user.email);
+            removeUser(user.id, context);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('There must be at least one user in the group'),
@@ -62,7 +63,7 @@ class PersonCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              user.getEmail(),
+                              user.email,
                               style: const TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,
@@ -71,12 +72,12 @@ class PersonCard extends StatelessWidget {
                             const SizedBox(height: 3),
                           ]))),
               Switch(
-                value: Logic.currentGroup.getAbility(user),
+                value: user.isAdmin(),
                 onChanged: (value) {
-                  if (!Logic.currentGroup.getAbility(user) ||
-                      Logic.currentGroup.anyAdmin()) {
-                    Logic.currentGroup.changeAbilities(user);
-                    userState = !userState;
+                  if (!user.isAdmin() ||
+                      Logic.members.anyAdmin()) {
+                    Logic.members.changeAbility(user);
+                    //userState = !userState;
                     (context as Element).reassemble();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -137,5 +138,39 @@ class PersonCard extends StatelessWidget {
       },
     );
     return answer;
+  }
+}
+
+Future<void> removeUser(int userId, BuildContext context) async {
+  var client = http.Client();
+  try {
+    var response = await http.delete(
+        Uri.https('stoady.herokuapp.com', '/teams/${Logic.currentGroupId}/members/remove', {'userId': userId.toString()}),
+        headers: {'executorId': Logic.currentUser.id.toString()});
+    Logic.members.members.remove((Logic.members.members).where((element) => element.id == userId).first);
+    (context as Element).reassemble();
+    if (response.statusCode != 200) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong, user wasn't removed.")));
+    }
+  } finally {
+    client.close();
+  }
+}
+
+Future<void> changeUserRole(int userId, BuildContext context, Role role) async {
+  var client = http.Client();
+  try {
+    var response = await http.put(
+        Uri.https('stoady.herokuapp.com', '/teams/${Logic.currentGroupId}/members/', {'userId': userId.toString(), 'userRole': role.toString()}),
+        headers: {'executorId': Logic.currentUser.id.toString()});
+    Logic.members.members.remove((Logic.members.members).where((element) => element.id == userId).first);
+    (context as Element).reassemble();
+    if (response.statusCode != 200) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Something went wrong, user wasn't removed.")));
+    }
+  } finally {
+    client.close();
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/question_counter.dart';
+import 'package:stoady/components/widgets/saved_star.dart';
 import 'package:stoady/components/widgets/test_path.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
+import 'package:stoady/pages/user/learn/learn_page.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -16,7 +18,6 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     LearningCard.isTestingCard = false;
-    int f;
     return Container(
       height: size.height,
       width: size.width,
@@ -26,14 +27,28 @@ class Background extends StatelessWidget {
               children: <Widget>[
             Row(children: <Widget>[
               SizedBox(height: size.height * 0.08, width: size.width * 0.85),
-              //savedStar(size, context),
+              const SavedStar(),
             ]),
             Column(children: <Widget>[
               SizedBox(height: size.height * 0.2, width: size.width),
               Image.asset('assets/images/learning_toad.png',
                   width: size.width * 0.13)
             ]),
-            const TestPath(isTest: true),
+            LearningPage.isSaved
+                ? Column(children: <Widget>[
+                    SizedBox(
+                        height: size.height * (0.1),
+                        width: size.width),
+                    const Text(
+                      "Saved Questions",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 26,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w900),
+                    )
+                  ])
+                : const TestPath(isTest: true),
             Row(
               children: <Widget>[
                 SizedBox(height: size.height * 1),
@@ -50,9 +65,6 @@ class Background extends StatelessWidget {
                 GestureDetector(
                   onTap: () => {
                     Logic.addIndex(true),
-                    if(Logic.currentIndex == 2) {
-                      f = 0,
-                    },
                     LearningCard.showFrontSide = true,
                     (context as Element).reassemble()
                   }, // Image tapped
@@ -70,40 +82,4 @@ class Background extends StatelessWidget {
           ])),
     );
   }
-}
-
-Widget savedStar(Size size, BuildContext context) {
-  if (Logic.currentUser
-      .isSaved(Logic.currentTopic.test.questions[Logic.currentIndex])) {
-    return GestureDetector(
-        onTap: () => {
-              (context as Element).reassemble(),
-              Logic.currentUser.removeTask(
-                  Logic.currentTopic.test.questions[Logic.currentIndex]),
-              savedStar(size, context)
-            },
-        child: Positioned(
-          top: 0,
-          right: 0,
-          child: Image.asset(
-            "assets/images/saved_empty.png",
-            width: size.width * 0.09,
-          ),
-        ));
-  }
-  return GestureDetector(
-      onTap: () => {
-            (context as Element).reassemble(),
-            Logic.currentUser
-                .addTask(Logic.currentTopic.test.questions[Logic.currentIndex]),
-            savedStar(size, context)
-          },
-      child: Positioned(
-        top: 0,
-        right: 0,
-        child: Image.asset(
-          "assets/images/saved_filled.png",
-          width: size.width * 0.09,
-        ),
-      ));
 }

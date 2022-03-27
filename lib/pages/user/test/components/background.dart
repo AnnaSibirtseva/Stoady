@@ -3,14 +3,17 @@ import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/components/widgets/question_counter.dart';
-import 'package:stoady/components/widgets/question_counter.dart';
+import 'package:stoady/components/widgets/saved_star.dart';
 import 'package:stoady/components/widgets/test_path.dart';
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/models/question.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
   late String currentAnswer = "";
+  late Map<Question, int> points = {};
+  late int totalScore = 1;
 
   Background({
     Key? key,
@@ -32,7 +35,7 @@ class Background extends StatelessWidget {
                 Row(children: <Widget>[
                   SizedBox(
                       height: size.height * 0.08, width: size.width * 0.85),
-                  savedStar(size, context),
+                  const SavedStar(),
                 ]),
                 Column(children: <Widget>[
                   SizedBox(height: size.height * 0.17, width: size.width),
@@ -120,38 +123,3 @@ class Background extends StatelessWidget {
   }
 }
 
-Widget savedStar(Size size, BuildContext context) {
-  if (Logic.currentUser
-      .isSaved(Logic.currentTopic.test.questions[Logic.currentIndex])) {
-    return GestureDetector(
-        onTap: () => {
-              (context as Element).reassemble(),
-              Logic.currentUser.removeTask(
-                  Logic.currentTopic.test.questions[Logic.currentIndex]),
-              savedStar(size, context)
-            },
-        child: Positioned(
-          top: 0,
-          right: 0,
-          child: Image.asset(
-            "assets/images/saved_empty.png",
-            width: size.width * 0.09,
-          ),
-        ));
-  }
-  return GestureDetector(
-      onTap: () => {
-            (context as Element).reassemble(),
-            Logic.currentUser
-                .addTask(Logic.currentTopic.test.questions[Logic.currentIndex]),
-            savedStar(size, context)
-          },
-      child: Positioned(
-        top: 0,
-        right: 0,
-        child: Image.asset(
-          "assets/images/saved_filled.png",
-          width: size.width * 0.09,
-        ),
-      ));
-}

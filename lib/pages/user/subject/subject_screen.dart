@@ -44,6 +44,22 @@ class _SubjectPage extends State<SubjectPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (Logic.currentSubjectId == 0) {
+      return Scaffold(
+          appBar: AppBar(),
+          drawer: const SideMenu(),
+          body: Center(
+              child: Column(children: [
+            const Text(
+              'No Group Selected',
+            ),
+            Image.asset(
+              "assets/images/sad.gif",
+              height: 125.0,
+              width: 125.0,
+            ),
+          ])));
+    }
     return Scaffold(
         appBar: AppBar(),
         drawer: const SideMenu(),
