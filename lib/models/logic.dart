@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:stoady/models/auth_info.dart';
 import 'package:stoady/models/member.dart';
 import 'package:stoady/models/question.dart';
+import 'package:stoady/models/random.dart';
 import 'package:stoady/models/result.dart';
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/team_members.dart';
@@ -17,6 +20,9 @@ class Logic {
   static User currentUser =
       User(1, "Kermit", "kermit_the_frog@mail.ru", "12345", 0);
   static AuthInfo userInfo = AuthInfo("", "");
+  static AuthInfo registerInfo =
+      AuthInfo.registerInfo("userName", "password", "email", Avatar.getRandomAvatar());
+
   static Topic currentTopic = Topic(
       0,
       "Matrices",

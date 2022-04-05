@@ -12,23 +12,29 @@ import 'package:stoady/models/user_group.dart';
 import 'package:stoady/pages/user/group/components/body.dart';
 
 class GroupPage extends StatefulWidget {
+  final bool fromLogIn;
+
   const GroupPage({
     Key? key,
+    required this.fromLogIn,
   }) : super(key: key);
 
   @override
-  _GroupPageState createState() => _GroupPageState();
+  _GroupPageState createState() => _GroupPageState(fromLogIn);
 }
 
 class _GroupPageState extends State<GroupPage> {
   late Future<List<UserGroup>> _futureList;
   late Future<User> _futureUser;
+  bool fromLogIn;
+
+  _GroupPageState(this.fromLogIn);
 
   @override
   void initState() {
     super.initState();
     _futureList = getUserGroups();
-    _futureUser = getUser();
+    _futureUser = fromLogIn ? getUser() : createUser();
   }
 
   Future<List<UserGroup>> getUserGroups() async {
@@ -37,8 +43,9 @@ class _GroupPageState extends State<GroupPage> {
       var response = await client.get(Uri.https('stoady.herokuapp.com',
           '/users/teams', {'userId': Logic.currentUser.getId().toString()}));
       if (response.statusCode == 200) {
-        return GroupMembers.fromJson(
-                jsonDecode(utf8.decode(response.bodyBytes)))
+        return GroupMembers
+            .fromJson(
+            jsonDecode(utf8.decode(response.bodyBytes)))
             .members;
       } else {
         // todo handle exception
@@ -69,6 +76,31 @@ class _GroupPageState extends State<GroupPage> {
     }
   }
 
+  Future<User> createUser() async {
+    var client = http.Client();
+    final jsonString = json.encode({
+      'username': Logic.registerInfo.userName,
+      'email': Logic.registerInfo.email,
+      'password': Logic.registerInfo.password,
+      'avatarId': Logic.registerInfo.avatarId
+    });
+    try {
+      var response = await client.post(
+          Uri.https('stoady.herokuapp.com', '/users/register'),
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+          body: jsonString);
+      if (response.statusCode == 200) {
+        return User.registerFromJson(
+            jsonDecode(utf8.decode(response.bodyBytes)), Logic.registerInfo);
+      } else {
+        // todo handle exception
+        throw Exception();
+      }
+    } finally {
+      client.close();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +111,9 @@ class _GroupPageState extends State<GroupPage> {
             builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
               if (snapshot.hasData) {
                 Logic.currentUser = snapshot.data!;
-                Logic.currentUser.setMailPassword(Logic.userInfo);
+                if (fromLogIn) {
+                  Logic.currentUser.setMailPassword(Logic.userInfo);
+                }
                 return FutureBuilder<List<UserGroup>>(
                     future: getUserGroups(),
                     builder: (BuildContext context,

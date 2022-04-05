@@ -20,9 +20,14 @@ class User {
         json['id'] as int, json['name'] as String, json['avatarId'] as int);
   }
 
+  factory User.registerFromJson(dynamic json, AuthInfo userInfo) {
+    return User(json['userId'] as int, userInfo.userName, userInfo.email,
+        userInfo.password, userInfo.avatarId);
+  }
+
   void setMailPassword(AuthInfo info) {
-     email = info.email;
-     password = info.password;
+    email = info.email;
+    password = info.password;
   }
 
   int getId() {

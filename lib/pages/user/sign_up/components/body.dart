@@ -3,6 +3,8 @@ import 'package:stoady/components/text_boxes/password_input.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
 import 'package:stoady/components/widgets/already_have_account.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
+import 'package:stoady/models/logic.dart';
+import 'package:stoady/pages/user/group/group_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 import 'background.dart';
 
@@ -31,19 +33,25 @@ class Body extends StatelessWidget {
           RoundedInputField(
             hintText: "Name",
             icon: Icons.person_outline_rounded,
-            onChanged: (value) {},
+            onChanged: (value) {
+              Logic.registerInfo.userName = value;
+            },
             isSmall: false,
             isAnswer: false,
           ),
           RoundedInputField(
             hintText: "E-mail",
-            onChanged: (value) {},
+            onChanged: (value) {
+              Logic.registerInfo.email = value;
+            },
             icon: Icons.email_outlined,
             isSmall: false,
             isAnswer: false,
           ),
           RoundedPasswordField(
-            onChanged: (value) {},
+            onChanged: (value) {
+              Logic.registerInfo.password = value;
+            },
           ),
           SizedBox(height: size.height * 0.03),
           RoundedButton(
@@ -55,7 +63,8 @@ class Body extends StatelessWidget {
               press: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const UserHomePage()))),
+                      builder: (context) =>
+                          const GroupPage(fromLogIn: false)))),
           SizedBox(height: size.height * 0.01),
           const AlreadyHaveAnAccountCheck(login: false)
         ],

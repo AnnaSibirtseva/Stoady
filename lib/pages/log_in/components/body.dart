@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
             isSmall: false,
             text: "LOG IN",
             press: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const GroupPage())),
+                MaterialPageRoute(builder: (context) => const GroupPage(fromLogIn: true))),
           ),
           SizedBox(height: size.height * 0.01),
           const AlreadyHaveAnAccountCheck()

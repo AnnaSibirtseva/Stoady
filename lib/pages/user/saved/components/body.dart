@@ -34,7 +34,7 @@ class Body extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LearningPage()))},
+                        builder: (context) => const LearningPage()))},
               ),
               SizedBox(width: size.width * 0.05),
               RoundedButton(

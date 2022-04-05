@@ -20,8 +20,8 @@ class Avatar {
   'https://ie.wampi.ru/2022/01/30/frog-prince-12.png'
   ];
 
-  static String getRandomAvatar() {
-    return _frogs[random.nextInt(_frogs.length)];
+  static int getRandomAvatar() {
+    return random.nextInt(_frogs.length);
   }
 
   static String getAvatar(int index) {

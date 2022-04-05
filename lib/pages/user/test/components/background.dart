@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
@@ -8,6 +11,7 @@ import 'package:stoady/components/widgets/test_path.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/models/question.dart';
 import 'package:stoady/pages/user/learn/components/card.dart';
+import 'package:http/http.dart' as http;
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -98,16 +102,17 @@ class Background extends StatelessWidget {
                                   {
                                     AnswerTextFieldContainer.currentState =
                                         AnswerState.correct,
-                                    // Logic.addIndex(true),
-                                    // (context as Element).reassemble(),
-                                    // AnswerTextFieldContainer.currentState =
-                                    //     AnswerState.empty
+                                    points[
+                                        Logic.questions[Logic.currentIndex]] = 1
                                   }
                                 else
                                   {
                                     AnswerTextFieldContainer.currentState =
-                                        AnswerState.wrong
-                                  }
+                                        AnswerState.wrong,
+                                    points[
+                                        Logic.questions[Logic.currentIndex]] = 0
+                                  },
+                                saveResults(calcResult()),
                               }
                             else
                               {
@@ -121,5 +126,33 @@ class Background extends StatelessWidget {
               ])),
     );
   }
-}
 
+  int calcResult() {
+    int score = 0;
+    for (var point in points.values) {
+      score += point;
+    }
+    return (score * 100) ~/ Logic.questions.length;
+  }
+
+  Future<void> saveResults(int newResult) async {
+    var client = http.Client();
+    final jsonString = json.encode({
+      'userId': Logic.currentUser.id,
+      'topicId': Logic.currentTopicId,
+      'result': newResult
+    });
+    try {
+      var response = await client.post(
+          Uri.https('stoady.herokuapp.com', '/tests'),
+          headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+          body: jsonString);
+      if (response.statusCode != 200) {
+        // todo handle exception
+        throw Exception();
+      }
+    } finally {
+      client.close();
+    }
+  }
+}

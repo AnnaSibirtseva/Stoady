@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/components/widgets/menu_list_tile.dart';
+import 'package:stoady/models/auth_info.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/models/user_group.dart';
 import 'package:stoady/pages/admin/admin_mode/admin_mode_page.dart';
@@ -63,8 +64,10 @@ class SideMenu extends StatelessWidget {
               canClick: true,
               icon: Icons.bar_chart_rounded),
           MenuListTile(
-              press: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GroupPage())),
+              press: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GroupPage(fromLogIn: true))),
               text: 'Groups',
               canClick: true,
               icon: Icons.groups_outlined),
@@ -92,8 +95,14 @@ class SideMenu extends StatelessWidget {
               icon: Icons.admin_panel_settings_outlined),
           const Divider(),
           MenuListTile(
-              press: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LogInPage())),
+              press: () => {
+                // Clearing old user info.
+                    Logic.userInfo = AuthInfo("", ""),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LogInPage()))
+                  },
               text: 'Log Out',
               canClick: true,
               icon: Icons.exit_to_app)
