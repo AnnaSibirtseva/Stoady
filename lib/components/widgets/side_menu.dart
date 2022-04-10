@@ -67,7 +67,7 @@ class SideMenu extends StatelessWidget {
               press: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => GroupPage(fromLogIn: true))),
+                      builder: (context) => const GroupPage(fromLogIn: true))),
               text: 'Groups',
               canClick: true,
               icon: Icons.groups_outlined),
@@ -75,7 +75,7 @@ class SideMenu extends StatelessWidget {
               press: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const UserHomePage())),
+                      builder: (context) => const UserHomePage(showAddButton: false))),
               text: 'Subjects',
               canClick: true,
               icon: Icons.library_books_outlined),
@@ -83,7 +83,7 @@ class SideMenu extends StatelessWidget {
           // TODO: check that person is admin in this group.
           MenuListTile(
               press: () => {
-                    isAdmin()
+                    Logic.isAdmin()
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -91,7 +91,7 @@ class SideMenu extends StatelessWidget {
                         : {}
                   },
               text: 'Admin Mode',
-              canClick: isAdmin(),
+              canClick: Logic.isAdmin(),
               icon: Icons.admin_panel_settings_outlined),
           const Divider(),
           MenuListTile(
@@ -112,11 +112,4 @@ class SideMenu extends StatelessWidget {
   }
 }
 
-bool isAdmin() {
-  List<UserGroup> list = (Logic.userGroups
-      .where((group) => group.teamId == Logic.currentGroupId)).toList();
-  if (list.isNotEmpty) {
-    return list[0].isAdmin();
-  }
-  return false;
-}
+

@@ -46,6 +46,16 @@ class Logic {
 
   static TeamMembers members = TeamMembers([]);
 
+
+  static bool isAdmin() {
+    List<UserGroup> list = (userGroups
+        .where((group) => group.teamId == currentGroupId)).toList();
+    if (list.isNotEmpty) {
+      return list[0].isAdmin();
+    }
+    return false;
+  }
+
   // static List<Group> allGroups = [
   //   currentGroup,
   //   currentGroup,

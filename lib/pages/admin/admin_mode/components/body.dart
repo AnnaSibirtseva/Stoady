@@ -6,6 +6,7 @@ import 'package:stoady/models/logic.dart';
 import 'package:http/http.dart' as http;
 import 'package:stoady/pages/admin/admin_mode/admin_mode_page.dart';
 import 'package:stoady/pages/admin/admin_mode/filter.dart';
+import 'package:stoady/pages/user/home/home_page.dart';
 
 import 'background.dart';
 
@@ -103,7 +104,12 @@ class Body extends StatelessWidget {
             primary: Colors.teal,
             // Moves text in the button.
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 7)),
-        onPressed: () => {},
+        onPressed: () =>
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                  const UserHomePage(showAddButton: true))),
       )
     ])));
   }

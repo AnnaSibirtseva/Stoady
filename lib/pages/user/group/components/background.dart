@@ -60,7 +60,7 @@ class Background extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const UserHomePage())),
+                                          const UserHomePage(showAddButton: false))),
                             }))),
             SizedBox(height: size.height * 0.15),
           ]),

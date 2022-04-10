@@ -6,46 +6,51 @@ import 'package:stoady/pages/user/subject/subject_screen.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final bool showAddButton;
 
-  Widget _page(int index) {
-    Logic.currentSubjectId = Logic.allSubjects[index].id;
-    Logic.currentSubject = Logic.allSubjects[index];
-    return SubjectPage();
-  }
+  const Body({Key? key, required this.showAddButton}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Background(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-        SizedBox(height: size.height * 0.16),
-        Expanded(
-            child: ListView.builder(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: size.height * 0.16),
+            Expanded(
+                child: ListView.builder(
               itemCount: Logic.allSubjects.length,
-              itemBuilder: (context, index) =>
-                  SubjectCard(
-                    subject: Logic.allSubjects[index],
-                    press: () =>
-                    {
-                      Logic.currentSubjectId = Logic.allSubjects[index].id,
-                      Logic.currentSubject = Logic.allSubjects[index],
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SubjectPage()))},
-                  ),
-            )
-        )]
-    )
-    ,
+              itemBuilder: (context, index) => SubjectCard(
+                subject: Logic.allSubjects[index],
+                press: () => {
+                  Logic.currentSubjectId = Logic.allSubjects[index].id,
+                  Logic.currentSubject = Logic.allSubjects[index],
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SubjectPage()))
+                },
+              ),
+            )),
+            Visibility(
+              child: FloatingActionButton(
+                onPressed: () => {}
+                // Navigator.pushReplacement(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (BuildContext context) => const GroupPage(fromLogIn: false)))
+                ,
+                child: const Icon(Icons.add_rounded, size: 35),
+              ),
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: showAddButton,
+            ),
+            SizedBox(height: size.height * 0.012),
+          ]),
     );
   }
 }
-
-

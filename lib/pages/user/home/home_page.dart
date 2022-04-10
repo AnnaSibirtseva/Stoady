@@ -10,14 +10,19 @@ import 'package:http/http.dart' as http;
 import 'package:stoady/pages/user/home/components/body.dart';
 
 class UserHomePage extends StatefulWidget {
-  const UserHomePage({Key? key}) : super(key: key);
+  final bool showAddButton;
+
+  const UserHomePage({Key? key, required this.showAddButton}) : super(key: key);
 
   @override
-  State<UserHomePage> createState() => _UserHomePageState();
+  State<UserHomePage> createState() => _UserHomePageState(showAddButton);
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+  bool showAddButton;
   late Future<Group> _futureCurrentGroup;
+
+  _UserHomePageState(this.showAddButton);
 
   @override
   void initState() {
@@ -55,7 +60,7 @@ class _UserHomePageState extends State<UserHomePage> {
               if (snapshot.hasData) {
                 Logic.currentGroup = snapshot.data!;
                 Logic.allSubjects = Logic.currentGroup.subjects;
-                return const Center(child: Body());
+                return Center(child: Body(showAddButton: showAddButton));
               } else if (snapshot.hasError) {
                 return const NoInternetWidget();
               } else {
