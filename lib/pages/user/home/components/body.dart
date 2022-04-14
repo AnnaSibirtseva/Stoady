@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/pages/subject_manager/subject_manager_page.dart';
 import 'package:stoady/pages/user/home/components/subject_card.dart';
 import 'package:stoady/pages/user/subject/subject_screen.dart';
 
@@ -27,21 +28,31 @@ class Body extends StatelessWidget {
                 press: () => {
                   Logic.currentSubjectId = Logic.allSubjects[index].id,
                   Logic.currentSubject = Logic.allSubjects[index],
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SubjectPage()))
+                  if (!showAddButton)
+                    {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SubjectPage()))
+                    }
+                  else
+                    {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const SubjectManagerPage(isNew: false)))
+                    }
                 },
               ),
             )),
             Visibility(
               child: FloatingActionButton(
-                onPressed: () => {}
-                // Navigator.pushReplacement(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (BuildContext context) => const GroupPage(fromLogIn: false)))
-                ,
+                onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const SubjectManagerPage(isNew: true))),
                 child: const Icon(Icons.add_rounded, size: 35),
               ),
               maintainSize: true,
