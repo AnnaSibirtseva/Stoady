@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
-import 'package:stoady/pages/subject_manager/subject_manager_page.dart';
+import 'package:stoady/pages/admin/subject_manager/subject_manager_page.dart';
 import 'package:stoady/pages/user/home/components/subject_card.dart';
 import 'package:stoady/pages/user/subject/subject_screen.dart';
 
@@ -37,7 +37,7 @@ class Body extends StatelessWidget {
                     }
                   else
                     {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>

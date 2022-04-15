@@ -7,6 +7,7 @@ import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/logic.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stoady/pages/admin/topic_manager/topic_manager_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 
 class Background extends StatelessWidget {
@@ -71,14 +72,15 @@ class Background extends StatelessWidget {
                                                     (BuildContext context) =>
                                                         confirmDelete(context));
                                           },
-                                          child: Positioned(
+                                          child: const Positioned(
                                             top: 0,
                                             right: 0,
-                                            child: Image.asset(
-                                              "assets/images/delete.png",
-                                              width: size.width * 0.09,
+                                            child:  Icon(
+                                                Icons.delete_forever_rounded,
+                                                color: Colors.teal,
+                                                size: 35)
                                             ),
-                                          ))))
+                                          )))
                             ],
                           ),
                           //SizedBox(height: size.height * 0.2, width: size.width * 0.02),
@@ -113,20 +115,41 @@ class Background extends StatelessWidget {
                                     ? ''
                                     : Logic.currentSubject.description,
                               ))),
-                      const Expanded(
+                      Expanded(
                           child: Align(
                               alignment: Alignment.topLeft,
-                              child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 5),
-                                  child: Text(
-                                    "Topics",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontSize: 30,
-                                        color: Colors.teal,
-                                        fontWeight: FontWeight.w900),
-                                  )))),
+                              child: Row(children: [
+                                const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 5),
+                                    child: Text(
+                                      "Topics",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          color: Colors.teal,
+                                          fontWeight: FontWeight.w900),
+                                    )),
+                                Expanded(
+                                    child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 15, vertical: 5),
+                                            child: GestureDetector(
+                                              //TODO:: TOPIC PAGE!!!
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                          const TopicManagerPage(isNew: true)));
+                                                },
+                                                child: const Icon(
+                                                    Icons.add_rounded,
+                                                    color: Colors.teal,
+                                                    size: 35)))))
+                              ]))),
                       child,
                       buttons(size, context, isNew),
                     ],

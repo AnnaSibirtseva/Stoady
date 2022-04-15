@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
-import 'package:stoady/pages/subject_manager/components/topic_card.dart';
+import 'package:stoady/pages/admin/subject_manager/components/topic_card.dart';
+import 'package:stoady/pages/admin/topic_manager/topic_manager_page.dart';
 
 import 'background.dart';
 
@@ -23,10 +24,20 @@ class Body extends StatelessWidget {
                 child: Expanded(
                     child: ListView.builder(
                   //shrinkWrap: true,
-                  itemCount: isNew ? 0 :Logic.currentSubject.topics.length,
+                  itemCount: isNew ? 0 : Logic.currentSubject.topics.length,
                   itemBuilder: (context, index) => TopicCard(
                     topic: Logic.currentSubject.topics[index],
-                    press: () => {},
+                    press: () {
+                      Logic.currentTopicInfo =
+                          Logic.currentSubject.topics[index];
+                      Logic.currentTopicId =
+                          Logic.currentSubject.topics[index].id;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const TopicManagerPage(isNew: false)));
+                    },
                   ),
                 ))),
           ]),
