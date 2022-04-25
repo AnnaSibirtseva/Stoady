@@ -63,24 +63,22 @@ class Background extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15, vertical: 15),
                                       child: GestureDetector(
-                                          onTap: () {
-                                            showDialog(
-                                                //if set to true allow to close popup by tapping out of the popup
-                                                barrierDismissible: false,
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        confirmDelete(context));
-                                          },
-                                          child: const Positioned(
+                                        onTap: () {
+                                          showDialog(
+                                              //if set to true allow to close popup by tapping out of the popup
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  confirmDelete(context));
+                                        },
+                                        child: const Positioned(
                                             top: 0,
                                             right: 0,
-                                            child:  Icon(
+                                            child: Icon(
                                                 Icons.delete_forever_rounded,
                                                 color: Colors.teal,
-                                                size: 35)
-                                            ),
-                                          )))
+                                                size: 35)),
+                                      )))
                             ],
                           ),
                           //SizedBox(height: size.height * 0.2, width: size.width * 0.02),
@@ -137,13 +135,40 @@ class Background extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 15, vertical: 5),
                                             child: GestureDetector(
-                                              //TODO:: TOPIC PAGE!!!
                                                 onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                          const TopicManagerPage(isNew: true)));
+                                                  isNew
+                                                      ? showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  "Can't create new topic"),
+                                                              content: const Text(
+                                                                  "You must save subject before adding anything to it."),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  child:
+                                                                      const Text(
+                                                                          'OK'),
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop(
+                                                                            false);
+                                                                  },
+                                                                )
+                                                              ],
+                                                            );
+                                                          })
+                                                      : Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const TopicManagerPage(
+                                                                      isNew:
+                                                                          true)));
                                                 },
                                                 child: const Icon(
                                                     Icons.add_rounded,

@@ -15,6 +15,7 @@ import 'package:http/http.dart' as http;
 
 class Background extends StatelessWidget {
   final Widget child;
+  final bool isSaved;
   late String currentAnswer = "";
   late Map<Question, int> points = {};
   late int totalScore = 1;
@@ -22,6 +23,7 @@ class Background extends StatelessWidget {
   Background({
     Key? key,
     required this.child,
+    required this.isSaved,
   }) : super(key: key);
 
   @override
@@ -46,7 +48,21 @@ class Background extends StatelessWidget {
                   Image.asset('assets/images/learning_toad.png',
                       width: size.width * 0.13)
                 ]),
-                const TestPath(isTest: true),
+                isSaved
+                    ? Column(children: <Widget>[
+                  SizedBox(
+                      height: size.height * (0.1),
+                      width: size.width),
+                  const Text(
+                    "Saved Questions",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w900),
+                  )
+                ])
+                    :const TestPath(isTest: true),
                 Row(
                   children: <Widget>[
                     SizedBox(height: size.height * 1),

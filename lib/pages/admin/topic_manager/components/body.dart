@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
+import 'package:stoady/pages/admin/question_manager/question_manager_screen.dart';
 import 'package:stoady/pages/admin/subject_manager/components/topic_card.dart';
 import 'package:stoady/pages/admin/topic_manager/components/question_card.dart';
 
@@ -27,7 +28,12 @@ class Body extends StatelessWidget {
                       itemCount: isNew ? 0 :Logic.currentTopicInfo.questions.length,
                       itemBuilder: (context, index) => QuestionCard(
                         question: Logic.currentTopicInfo.questions[index],
-                        press: () => {},
+                        press: () {Logic.currentIndex = index;
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const QuestionManagerPage(isNew: false)));},
                       ),
                     ))),
           ]),

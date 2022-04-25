@@ -7,6 +7,7 @@ import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/models/logic.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stoady/pages/admin/question_manager/question_manager_screen.dart';
 import 'package:stoady/pages/admin/subject_manager/subject_manager_page.dart';
 import 'package:stoady/pages/admin/topic_manager/topic_manager_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
@@ -137,7 +138,41 @@ class Background extends StatelessWidget {
                                                 horizontal: 15, vertical: 5),
                                             child: GestureDetector(
                                                 //TODO:: TOPIC PAGE!!!
-                                                onTap: () {},
+                                                onTap: () {
+                                                  isNew
+                                                      ? showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  "Can't create new question"),
+                                                              content: const Text(
+                                                                  "You must save topic before adding anything to it."),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  child:
+                                                                      const Text(
+                                                                          'OK'),
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop(
+                                                                            false);
+                                                                  },
+                                                                )
+                                                              ],
+                                                            );
+                                                          })
+                                                      : Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const QuestionManagerPage(
+                                                                      isNew:
+                                                                          true)));
+                                                },
                                                 child: const Icon(
                                                     Icons.add_rounded,
                                                     color: Colors.teal,

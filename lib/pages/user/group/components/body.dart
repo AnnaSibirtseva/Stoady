@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => const GroupPage(fromLogIn: false)));
+                          builder: (BuildContext context) => const GroupPage(fromLogIn: true)));
                 } else {
                   // todo handle exception
                   throw Exception();

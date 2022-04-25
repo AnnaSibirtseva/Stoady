@@ -54,19 +54,10 @@ class Body extends StatelessWidget {
                           builder: (BuildContext context) =>
                               const AdminModePage()));
                 } else {
-                  AlertDialog(
-                    title: const Text("Add Failed."),
-                    content: const Text(
-                        "The user has not been added, check that the mail is entered correctly."),
-                    actions: <Widget>[
-                      TextButton(
-                        child: const Text('OK'),
-                        onPressed: () {
-                          Navigator.of(context).pop(false);
-                        },
-                      )
-                    ],
-                  );
+                  // Notifying user that sth went wrong.
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                          "Add Failed. Check that the mail is entered correctly.")));
                 }
               } finally {
                 client.close();

@@ -21,14 +21,13 @@ class PersonCard extends StatelessWidget {
         key: Key(user.email),
         confirmDismiss: (DismissDirection direction) async {
           //TODO: check that user is hthe only admin -> no delete.
-          if (Logic.members.members.length > 1) {
-            showSnackBar(context, user.email);
-            removeUser(user.id, context);
-          } else if (user.role == Role.Creator) {
+          if (user.role == Role.Creator) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("You can't delete creator"),
             ));
             return false;
+          } else if (Logic.members.members.length > 1) {
+            removeUser(user.id, context);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('There must be at least one user in the group'),
@@ -41,7 +40,7 @@ class PersonCard extends StatelessWidget {
               return AlertDialog(
                 title: const Text("Confirm"),
                 content:
-                const Text("Are you sure you wish to delete this item?"),
+                Text("Are you sure you wish to delete this ${user.email}?"),
                 actions: <Widget>[
                   TextButton(
                     child: const Text('CANCEL'),
@@ -53,6 +52,8 @@ class PersonCard extends StatelessWidget {
                     child: const Text('ACCEPT'),
                     onPressed: () {
                       Navigator.of(context).pop(true);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('User ${user.email} deleted')));
                     },
                   )
                 ],
@@ -117,42 +118,6 @@ class PersonCard extends StatelessWidget {
         color: Colors.white,
       ),
     );
-  }
-
-  showSnackBar(context, userMail) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('User $userMail deleted')));
-  }
-
-  bool confirmDialog(BuildContext context, userMail) {
-    bool answer = false;
-    showDialog(
-      context: context,
-      barrierDismissible: false, // user must tap button for close dialog!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Deactivate'),
-          content: Text('Delete user $userMail?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('CANCEL'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                answer = false;
-              },
-            ),
-            TextButton(
-              child: const Text('ACCEPT'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                answer = true;
-              },
-            )
-          ],
-        );
-      },
-    );
-    return answer;
   }
 }
 
