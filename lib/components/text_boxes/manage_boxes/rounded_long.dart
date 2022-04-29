@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/components/text_boxes/answer_text_field.dart';
 import 'package:stoady/components/text_boxes/manage_boxes/text_field.dart';
-import 'package:stoady/components/text_boxes/text_field_container.dart';
 
 class RoundedInputTextField extends StatelessWidget {
   final bool isBig;
+  final bool isQuestion;
   final String hintText;
   final String initialValue;
   final ValueChanged<String> onChanged;
@@ -15,12 +14,14 @@ class RoundedInputTextField extends StatelessWidget {
     required this.onChanged,
     required this.isBig,
     required this.initialValue,
+    required this.isQuestion,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldManagerContainer(
       isBig: isBig,
+      isQuestion: isQuestion,
       child: TextFormField(
         keyboardType: TextInputType.multiline,
         textAlign: TextAlign.left,//Alignment.topLeft,
@@ -28,7 +29,7 @@ class RoundedInputTextField extends StatelessWidget {
         initialValue: initialValue,
         maxLines: null,
         minLines: null,
-        maxLength: isBig ? 250 : 50,
+        maxLength: isQuestion ? 100 : isBig ? 250 : 50,
         onChanged: onChanged,
         cursorColor: Colors.teal,
         decoration: InputDecoration(

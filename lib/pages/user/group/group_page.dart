@@ -132,7 +132,7 @@ class _GroupPageState extends State<GroupPage> {
                     });
               } else if (snapshot.hasError) {
                 return AlertDialog(
-                  title: const Text("Authorization Failed."),
+                  title: const Text(" ⚠ Authorization Failed."),
                   content: const Text("Please check your email and password."),
                   actions: <Widget>[
                     TextButton(

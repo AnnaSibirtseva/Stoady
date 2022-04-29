@@ -92,6 +92,7 @@ class Background extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 5),
                               child: RoundedInputTextField(
+                                isQuestion: false,
                                 hintText: "Name",
                                 onChanged: (value) {
                                   _name = value;
@@ -106,6 +107,7 @@ class Background extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 0),
                               child: RoundedInputTextField(
+                                isQuestion: false,
                                 hintText: "Description",
                                 onChanged: (value) {
                                   _description = value;
@@ -265,6 +267,7 @@ class Background extends StatelessWidget {
   }
 
   Future<void> addTopic(BuildContext context) async {
+    print("+++++++++++++++++++++" + _name);
     var client = http.Client();
     final jsonString = json.encode({
       'subjectId': Logic.currentSubjectId,

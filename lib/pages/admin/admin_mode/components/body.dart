@@ -20,6 +20,7 @@ class Body extends StatelessWidget {
     return Background(
         child: Center(
             child: Column(children: <Widget>[
+
       SizedBox(height: size.height * 0.15),
       Row(
         children: [

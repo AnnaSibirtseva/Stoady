@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class TextFieldManagerContainer extends StatelessWidget {
   final Widget child;
   final bool isBig;
+  final bool isQuestion;
 
   const TextFieldManagerContainer({
     Key? key,
     required this.child,
     required this.isBig,
+    required this.isQuestion,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class TextFieldManagerContainer extends StatelessWidget {
       padding: const
       EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       width: size.width * 0.9,
-      height: isBig ? size.height * 0.31 : size.height * 0.13,
+      height: isQuestion ? size.height * 0.25 :  isBig ? size.height * 0.31 : size.height * 0.13,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),

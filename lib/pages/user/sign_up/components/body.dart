@@ -9,6 +9,13 @@ import 'package:stoady/pages/user/home/home_page.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
+  static const int minName = 2;
+  static const int maxName = 30;
+  static const int minMail = 7;
+  static const int maxMail = 100;
+  static const int minPassword = 5;
+  static const int maxPassword = 30;
+
   const Body({Key? key}) : super(key: key);
 
   @override
@@ -60,11 +67,37 @@ class Body extends StatelessWidget {
               isSmall: false,
               text: "SIGN UP",
               //TODO: change to normal page!!!
-              press: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const GroupPage(fromLogIn: false)))),
+              press: () => {
+                    if (Logic.registerInfo.userName.length < minName ||
+                        Logic.registerInfo.userName.length > maxName)
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                "The name must be between 2 and 30 characters.")))
+                      }
+                    else if (Logic.registerInfo.email.length < minMail ||
+                        Logic.registerInfo.email.length > maxMail)
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                "The e-mail must be between 7 and 100 characters.")))
+                      }
+                    else if (Logic.registerInfo.password.length < minPassword ||
+                        Logic.registerInfo.password.length > maxPassword)
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                "The password must be between 8 and 30 characters.")))
+                      }
+                    else
+                      {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GroupPage(fromLogIn: false)))
+                      }
+                  }),
           SizedBox(height: size.height * 0.01),
           const AlreadyHaveAnAccountCheck(login: false)
         ],

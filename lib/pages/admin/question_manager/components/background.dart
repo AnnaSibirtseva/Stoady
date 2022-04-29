@@ -98,6 +98,7 @@ class Background extends StatelessWidget {
                                         .currentTopicInfo
                                         .questions[Logic.currentIndex]
                                         .questionText,
+                                isQuestion: true,
                               ))),
                       Align(
                           alignment: Alignment.topLeft,
@@ -105,6 +106,7 @@ class Background extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 0),
                               child: RoundedInputTextField(
+                                isQuestion: true,
                                 hintText: "Answer",
                                 onChanged: (value) {
                                   _answerText = value;

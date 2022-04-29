@@ -5,8 +5,8 @@ import 'package:stoady/models/user.dart';
 import 'logic.dart';
 
 class Group {
-  late final String name;
-  late final String picture;
+  late String name;
+  late String picture;
   List<Subject> subjects = [];
 
   Group(this.name, this.picture, this.subjects);
@@ -58,8 +58,8 @@ class Group {
   }
 
   String getName() {
-    if (name.length > 10) {
-      return name.substring(0, 10) + "...";
+    if (name.length >= 11) {
+      return name.substring(0, 11) + "...";
     }
     return name;
   }

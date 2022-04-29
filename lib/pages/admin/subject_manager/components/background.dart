@@ -90,6 +90,7 @@ class Background extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 5),
                               child: RoundedInputTextField(
+                                isQuestion: false,
                                 hintText: "Name",
                                 onChanged: (value) {
                                   _name = value;
@@ -104,6 +105,7 @@ class Background extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 0),
                               child: RoundedInputTextField(
+                                isQuestion: false,
                                 hintText: "Description",
                                 onChanged: (value) {
                                   _description = value;

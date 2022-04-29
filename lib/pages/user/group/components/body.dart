@@ -9,6 +9,8 @@ import 'package:stoady/pages/user/group/group_page.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
+  static const int maxNameLen = 30;
+
   const Body({Key? key}) : super(key: key);
 
   @override
@@ -48,7 +50,8 @@ class Body extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => const GroupPage(fromLogIn: true)));
+                          builder: (BuildContext context) =>
+                              const GroupPage(fromLogIn: true)));
                 } else {
                   // todo handle exception
                   throw Exception();
