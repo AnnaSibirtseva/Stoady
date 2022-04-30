@@ -145,7 +145,7 @@ class Background extends StatelessWidget {
                                                               context) {
                                                             return AlertDialog(
                                                               title: const Text(
-                                                                  "Can't create new topic"),
+                                                                  "❌ Can't create new topic"),
                                                               content: const Text(
                                                                   "You must save subject before adding anything to it."),
                                                               actions: <Widget>[
@@ -220,7 +220,7 @@ class Background extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                                title: const Text("Nothing to save."),
+                                title: const Text("💾 Nothing to save."),
                                 content: const Text(
                                     "You must fill name to save subject."),
                                 actions: <Widget>[
@@ -315,7 +315,7 @@ class Background extends StatelessWidget {
   AlertDialog confirmDelete(BuildContext context) {
     if (isNew) {
       return AlertDialog(
-        title: const Text("Nothing to delete."),
+        title: const Text("❌ Nothing to delete."),
         content: const Text("This subject don't exist yet."),
         actions: <Widget>[
           TextButton(
@@ -328,7 +328,7 @@ class Background extends StatelessWidget {
       );
     }
     return AlertDialog(
-      title: const Text("Confirm"),
+      title: const Text("✔️Confirm"),
       content: const Text("Are you sure you wish to delete this subject?"),
       actions: <Widget>[
         TextButton(

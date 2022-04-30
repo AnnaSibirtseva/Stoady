@@ -148,7 +148,7 @@ class Background extends StatelessWidget {
                                                               context) {
                                                             return AlertDialog(
                                                               title: const Text(
-                                                                  "Can't create new question"),
+                                                                  "❌ Can't create new question"),
                                                               content: const Text(
                                                                   "You must save topic before adding anything to it."),
                                                               actions: <Widget>[
@@ -217,7 +217,7 @@ class Background extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                                title: const Text("Nothing to save."),
+                                title: const Text("💾 Nothing to save."),
                                 content: const Text(
                                     "You must fill name to save topic."),
                                 actions: <Widget>[
@@ -313,7 +313,7 @@ class Background extends StatelessWidget {
   AlertDialog confirmDelete(BuildContext context) {
     if (isNew) {
       return AlertDialog(
-        title: const Text("Nothing to delete."),
+        title: const Text("❌ Nothing to delete."),
         content: const Text("This topic don't exist yet."),
         actions: <Widget>[
           TextButton(
@@ -326,7 +326,7 @@ class Background extends StatelessWidget {
       );
     }
     return AlertDialog(
-      title: const Text("Confirm"),
+      title: const Text("✔️Confirm"),
       content: const Text("Are you sure you wish to delete this topic?"),
       actions: <Widget>[
         TextButton(

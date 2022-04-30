@@ -87,7 +87,7 @@ class _LearningPage extends State<LearningPage> {
                   return Center(child: Background(child: Container()));
                 }
                 return AlertDialog(
-                  title: const Text("Information"),
+                  title: const Text("🔎️ Information"),
                   content:
                       const Text("There are no questions in this topic yet."),
                   actions: <Widget>[

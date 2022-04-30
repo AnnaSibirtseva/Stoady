@@ -90,6 +90,8 @@ class _GroupPageState extends State<GroupPage> {
           headers: {HttpHeaders.contentTypeHeader: 'application/json'},
           body: jsonString);
       if (response.statusCode == 200) {
+        Logic.userInfo.email = Logic.registerInfo.email;
+        Logic.userInfo.password = Logic.registerInfo.password;
         return User.registerFromJson(
             jsonDecode(utf8.decode(response.bodyBytes)), Logic.registerInfo);
       } else {

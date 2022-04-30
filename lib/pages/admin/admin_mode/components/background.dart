@@ -41,7 +41,7 @@ class Background extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return const AlertDialog(
-                              title: Text("INFO"),
+                              title: Text("🔎️ INFO"),
                               content: Text(
                                   " - To change the group name or avatar, click on the group name\n\n"
                                   " - To remove a user from the group, swipe their email to the left\n"),

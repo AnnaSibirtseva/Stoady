@@ -38,7 +38,7 @@ class PersonCard extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Confirm"),
+                title: const Text("✔️Confirm"),
                 content:
                 Text("Are you sure you wish to delete this ${user.email}?"),
                 actions: <Widget>[

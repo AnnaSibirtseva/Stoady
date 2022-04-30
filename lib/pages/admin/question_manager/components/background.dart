@@ -156,7 +156,7 @@ class Background extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                                title: const Text("Wrong question"),
+                                title: const Text("❌ Wrong question"),
                                 content: const Text(
                                     "You have to fill in both fields to create a new question"),
                                 actions: <Widget>[
@@ -253,7 +253,7 @@ class Background extends StatelessWidget {
   AlertDialog confirmDelete(BuildContext context) {
     if (isNew) {
       return AlertDialog(
-        title: const Text("Nothing to delete."),
+        title: const Text("❌ Nothing to delete."),
         content: const Text("This question don't exist yet."),
         actions: <Widget>[
           TextButton(
@@ -266,7 +266,7 @@ class Background extends StatelessWidget {
       );
     }
     return AlertDialog(
-      title: const Text("Confirm"),
+      title: const Text("✔️Confirm"),
       content: const Text("Are you sure you wish to delete this question?"),
       actions: <Widget>[
         TextButton(

@@ -93,7 +93,7 @@ class _TestingPage extends State<TestingPage> {
                   return Center(child: Background(child: Container(), isSaved: isSaved));
                 }
                 return AlertDialog(
-                  title: const Text("Information"),
+                  title: const Text("🔎 Information"),
                   content:
                       const Text("There are no questions in this topic yet."),
                   actions: <Widget>[
