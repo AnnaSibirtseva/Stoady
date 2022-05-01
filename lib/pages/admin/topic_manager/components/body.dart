@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/admin/question_manager/question_manager_screen.dart';
-import 'package:stoady/pages/admin/subject_manager/components/topic_card.dart';
 import 'package:stoady/pages/admin/topic_manager/components/question_card.dart';
 
 import 'background.dart';

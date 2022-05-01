@@ -3,10 +3,8 @@ import 'package:stoady/components/text_boxes/password_input.dart';
 import 'package:stoady/components/widgets/already_have_account.dart';
 import 'package:stoady/components/widgets/buttons/rounded_button.dart';
 import 'package:stoady/components/text_boxes/rounded_input.dart';
-import 'package:stoady/models/auth_info.dart';
 import 'package:stoady/models/logic.dart';
 import 'package:stoady/pages/user/group/group_page.dart';
-import 'package:stoady/pages/user/home/home_page.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {

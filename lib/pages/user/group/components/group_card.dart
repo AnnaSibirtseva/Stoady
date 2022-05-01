@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/group.dart';
-import 'package:stoady/models/subject.dart';
 
 class GroupCard extends StatelessWidget {
   const GroupCard({

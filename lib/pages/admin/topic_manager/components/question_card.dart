@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stoady/models/question.dart';
-import 'package:stoady/models/result.dart';
-import 'package:stoady/models/topic_info.dart';
 
 class QuestionCard extends StatelessWidget {
   const QuestionCard({

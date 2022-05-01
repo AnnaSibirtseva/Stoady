@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/topic_info.dart';
 
 class TopicCard extends StatelessWidget {

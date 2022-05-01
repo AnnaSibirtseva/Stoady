@@ -9,7 +9,6 @@ import 'package:stoady/models/logic.dart';
 import 'package:http/http.dart' as http;
 import 'package:stoady/pages/admin/question_manager/question_manager_screen.dart';
 import 'package:stoady/pages/admin/subject_manager/subject_manager_page.dart';
-import 'package:stoady/pages/admin/topic_manager/topic_manager_page.dart';
 import 'package:stoady/pages/user/home/home_page.dart';
 
 class Background extends StatelessWidget {

@@ -1,19 +1,14 @@
-import 'dart:math';
-
 import 'package:stoady/models/auth_info.dart';
-import 'package:stoady/models/member.dart';
 import 'package:stoady/models/question.dart';
 import 'package:stoady/models/random.dart';
 import 'package:stoady/models/result.dart';
 import 'package:stoady/models/subject.dart';
 import 'package:stoady/models/team_members.dart';
-import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/topic_info.dart';
 import 'package:stoady/models/user.dart';
 import 'package:stoady/models/user_group.dart';
 
 import 'group.dart';
-import 'group_members.dart';
 
 class Logic {
   static int currentIndex = 0;
@@ -22,14 +17,6 @@ class Logic {
   static AuthInfo userInfo = AuthInfo("", "");
   static AuthInfo registerInfo =
       AuthInfo.registerInfo("userName", "password", "email", Avatar.getRandomAvatar());
-
-  static Topic currentTopic = Topic(
-      0,
-      "Matrices",
-      "In mathematics, a matrix (plural matrices) is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object." +
-          "\n\nContains the following topics:\n  - Basics \n  - Basic Operations \n  - Main Operations \n  - Types \n",
-      0,
-      0);
 
   static int currentGroupId = -1;
   static Group currentGroup = Group(" ", " ", []);
@@ -55,18 +42,6 @@ class Logic {
     }
     return false;
   }
-
-  // static List<Group> allGroups = [
-  //   currentGroup,
-  //   currentGroup,
-  //   currentGroup,
-  //   currentGroup,
-  //   currentGroup,
-  //   Group(
-  //       "MSU Economics and Finance",
-  //       "https://s.zefirka.net/images/2017-05-17/slonyata-milye-malenkie-giganty/slonyata-milye-malenkie-giganty-9.jpg",
-  //       currentUser)
-  // ];
   static List<UserGroup> userGroups = [];
 
   static void addIndex(bool add) {
@@ -85,36 +60,4 @@ class Logic {
     Subject(2, "Discrete Mathematics",
         "Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. "),
   ];
-
-// static String getTopicName(int id) {
-//   //TODO check for null
-//   allTopics.where((topic) => topic.getId() == id).toList();
-//   return allTopics
-//       .where((topic) => topic.getId() == id)
-//       .toList()[0]
-//       .getTitle();
-// }
-
-// static List<Topic> allTopics = [
-//   Topic(
-//       0,
-//       "Matrices",
-//       "In mathematics, a matrix (plural matrices) is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns, which is used to represent a mathematical object or a property of such an object." +
-//           "\n\nContains the following topics:\n  - Basics \n  - Basic Operations \n  - Main Operations \n  - Types \n",
-//       0,
-//       0),
-//   Topic(
-//       1,
-//       "Vectors",
-//       "Probability theory is the branch of mathematics concerned with probability.",
-//       0,
-//       1),
-//   Topic(
-//       2,
-//       "Complex numbers",
-//       "Discrete mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. ",
-//       0,
-//       1),
-// ];
-
 }

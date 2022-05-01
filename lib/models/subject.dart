@@ -1,5 +1,3 @@
-
-import 'package:stoady/models/topic.dart';
 import 'package:stoady/models/topic_info.dart';
 
 class Subject {
