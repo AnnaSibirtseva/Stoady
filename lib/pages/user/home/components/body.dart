@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
             )),
             Visibility(
               child: FloatingActionButton(
-                onPressed: () => Navigator.pushReplacement(
+                onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>

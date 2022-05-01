@@ -50,19 +50,18 @@ class Background extends StatelessWidget {
                 ]),
                 isSaved
                     ? Column(children: <Widget>[
-                  SizedBox(
-                      height: size.height * (0.1),
-                      width: size.width),
-                  const Text(
-                    "Saved Questions",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w900),
-                  )
-                ])
-                    :const TestPath(isTest: true),
+                        SizedBox(
+                            height: size.height * (0.1), width: size.width),
+                        const Text(
+                          "Saved Questions",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 26,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w900),
+                        )
+                      ])
+                    : const TestPath(isTest: true),
                 Row(
                   children: <Widget>[
                     SizedBox(height: size.height * 1),

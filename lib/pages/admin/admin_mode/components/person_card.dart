@@ -26,19 +26,12 @@ class PersonCard extends StatelessWidget {
               content: Text("You can't delete creator"),
             ));
             return false;
-          } else if (Logic.members.members.length > 1) {
-            removeUser(user.id, context);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('There must be at least one user in the group'),
-            ));
-            return false;
           }
           return await showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("✔️Confirm"),
+                title: const Text("✔️ Confirm"),
                 content:
                 Text("Are you sure you wish to delete this ${user.email}?"),
                 actions: <Widget>[
@@ -51,6 +44,7 @@ class PersonCard extends StatelessWidget {
                   TextButton(
                     child: const Text('ACCEPT'),
                     onPressed: () {
+                      removeUser(user.id, context);
                       Navigator.of(context).pop(true);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('User ${user.email} deleted')));

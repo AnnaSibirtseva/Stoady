@@ -58,7 +58,7 @@ class Group {
   }
 
   String getName() {
-    if (name.length >= 11) {
+    if (name.length > 11) {
       return name.substring(0, 11) + "...";
     }
     return name;
