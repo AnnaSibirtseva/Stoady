@@ -29,11 +29,11 @@ class _QuestionManagerPage extends State<QuestionManagerPage> {
   void initState() {
     super.initState();
     if (!isNew) {
-      _currentTopics = getSubject();
+      _currentTopics = getTopics();
     }
   }
 
-  Future<List<TopicInfo>> getSubject() async {
+  Future<List<TopicInfo>> getTopics() async {
     var client = http.Client();
     try {
       var response = await client.get(Uri.https(

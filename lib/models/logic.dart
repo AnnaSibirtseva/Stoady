@@ -16,7 +16,7 @@ class Logic {
       User(1, "Kermit", "kermit_the_frog@mail.ru", "12345", 0);
   static AuthInfo userInfo = AuthInfo("", "");
   static AuthInfo registerInfo =
-      AuthInfo.registerInfo("userName", "password", "email", Avatar.getRandomAvatar());
+      AuthInfo.registerInfo("", "", "", Avatar.getRandomAvatar());
 
   static int currentGroupId = -1;
   static Group currentGroup = Group(" ", " ", []);

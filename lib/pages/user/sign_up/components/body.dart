@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
   static const int maxName = 30;
   static const int minMail = 7;
   static const int maxMail = 100;
-  static const int minPassword = 5;
+  static const int minPassword = 8;
   static const int maxPassword = 30;
 
   const Body({Key? key}) : super(key: key);

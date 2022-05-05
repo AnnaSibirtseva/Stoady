@@ -26,10 +26,6 @@ class Subject {
     return name;
   }
 
-  int getID() {
-    return id;
-  }
-
   String getDescription() {
     return description;
   }
